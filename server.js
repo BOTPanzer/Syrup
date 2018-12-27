@@ -17,12 +17,11 @@ client.on("ready", () => {
 })
 
 client.on("guildCreate", guild => {
-  // This event triggers when the bot joins a guild.
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  client.user.setActivity(`Serving ${client.guilds.size} servers`);
 });
 
 client.on("guildDelete", guild => {
+  console.log(`Guild exited: ${guild.name} (id: ${guild.id}). This guild had ${guild.memberCount} members.`);
 });
 
 client.on('guildMemberAdd', (guildMember) => {
@@ -50,22 +49,24 @@ if (loteria === 333) {
 
 if (message.channel.name === "pokécord") {
 //nada :v
+} else if (message.channel.name === "pruebas") {
+//nada :v
 } else {
   let xpAdd = Math.floor(Math.random() * 3) + 7;
-  console.log(message.author.tag + " won " + xpAdd);
+  console.log(message.author.tag + " ha ganado " + xpAdd);
   
   if(!xp[message.author.id]){
     xp[message.author.id] = {
       xp: 0,
-      level: 1
+      level: 0
     };
   }
-  
   
   let curxp = xp[message.author.id].xp;
   let curlvl = xp[message.author.id].level;
   let nxtLvl = xp[message.author.id].level * 300;
   xp[message.author.id].xp =  curxp + xpAdd;
+  
   if(nxtLvl <= xp[message.author.id].xp){
     xp[message.author.id].level = curlvl + 1;
     let lvlup = new Discord.RichEmbed()
@@ -75,24 +76,35 @@ if (message.channel.name === "pokécord") {
 
     message.channel.send(lvlup).then(msg => {msg.delete(5000)});
     money.updateBal(message.author.id, 10).then((i) => {
-      
-    if (curlvl + 1 === 10) {
-      let commands = require(`./commands/Xp/chest.js`);
+    
+    message.guild.fetchMember(message.author)
+    .then(member => {
+    if (curlvl + 1 === 15) {
+      let role = member.guild.roles.find("name", "Pro lvl 15");
+      member.addRole(role).catch(console.error);
+      let commands = require(`./commands/Cheats/chest.js`);
       commands.run(client, message, args);
     }
-    if (curlvl + 1 === 20) {
-      let commands = require(`./commands/Xp/isla.js`);
+    if (curlvl + 1 === 35) {
+      let role = member.guild.roles.find("name", "Heroe lvl 35");
+      member.addRole(role).catch(console.error);
+      let commands = require(`./commands/Cheats/isla.js`);
       commands.run(client, message, args);
     }
-    if (curlvl + 1 === 30) {
-      let commands = require(`./commands/Xp/nsfw.js`);
+    if (curlvl + 1 === 50) {
+      let role = member.guild.roles.find("name", "Dios lvl 50");
+      member.addRole(role).catch(console.error);
+      let commands = require(`./commands/Cheats/nsfw.js`);
       commands.run(client, message, args); 
     }
-    if (curlvl + 1 === 40) {
-      let commands = require(`./commands/Xp/ban.js`);
+    if (curlvl + 1 === 75) {
+      let role = member.guild.roles.find("name", "Leyenda lvl 75");
+      member.addRole(role).catch(console.error);
+      let commands = require(`./commands/Cheats/ban.js`);
       commands.run(client, message, args); 
     }
-  })
+    })
+    })
   } 
   fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
     if(err) console.log(err)
@@ -146,7 +158,7 @@ if (message.channel.name === "pokécord") {
   }
 
   if(command === "addrole") {
-    let commands = require(`./commands/addrole.js`);
+    let commands = require(`./commands/Administracion/addrole.js`);
     commands.run(client, message, args);  
   }
 
@@ -211,11 +223,6 @@ if (message.channel.name === "pokécord") {
     commands.run(client, message, args);
   }
 
-  if(command === "paycheat") {
-    let commands = require(`./commands/paycheat.js`);
-    commands.run(client, message, args);
-  }
-
 
 //Random
 
@@ -261,8 +268,30 @@ if (message.channel.name === "pokécord") {
     let commands = require(`./commands/Xp/levels.js`);
     commands.run(client, message, args);
   }
-});
 
+
+//Cheats
+
+  if(command === "cheats.pay") {
+    let commands = require(`./commands/Cheats/paycheat.js`);
+    commands.run(client, message, args);
+  }
+
+  if(command === "cheats.xp") {
+    let commands = require(`./commands/Cheats/xpcheat.js`);
+    commands.run(client, message, args);
+  }
+
+  if(command === "cheats.levels") {
+    let commands = require(`./commands/Cheats/levelcheat.js`);
+    commands.run(client, message, args);
+  }
+
+  if(command === "cheats.give") {
+    let commands = require(`./commands/Cheats/givecheat.js`);
+    commands.run(client, message, args);
+  }
+});
 
 
 client.login(token);

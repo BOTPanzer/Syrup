@@ -1,6 +1,7 @@
 
 module.exports.run = async (client, message, args) => {
-  if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Lo siento, no tienes los permisos necesarios para hacer eso.");
+  if(!message.member.roles.some(r=>["Hacker", "N WORD TELLERS"].includes(r.name)) )
+    return message.reply("Lo siento, no tienes los permisos necesarios para hacer eso.");
   
 let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 if(!member)
