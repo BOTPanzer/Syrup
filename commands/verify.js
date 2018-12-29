@@ -6,6 +6,6 @@ module.exports.run = async (client, message, args) => {
   .then(member => {
     let role = member.guild.roles.find("name", "Normies");
     member.addRole(role).catch(console.error);
-    await member.send("Felicidades!!, has verificado y ya puedes usar el servidor.")
+    member.send("Felicidades!!, has verificado y ya puedes usar el servidor.")
   });
 }
