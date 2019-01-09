@@ -1,10 +1,10 @@
-﻿const Discord = require("discord.js");
+const Discord = require("discord.js");
 const client = new Discord.Client();
 var money = require('discord-money');
 var fs = require('fs');
 let serverconfig = require("./commands/serverconfig.json");
 let xp = require("./commands/Xp/xp.json");
-const token = "NTI3ODE2MDczMjM2NTc4MzA1.DxDvXg.sqqWLbdE4R2b1OFAGo2qA8JnDfc";
+const token = process.env.token;
 let userdata = require("./commands/user.json");
 function doMagic() {
   var rand = ['el nuevo video de Pewd', 'memes en reddit', 'bailes rusos', 'tutoriales de FdFlavia', 'el pack de Carbo'];
