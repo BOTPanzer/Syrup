@@ -1,11 +1,10 @@
 const Discord = require("discord.js");
+let serverconfig = require("../serverconfig.json");
 
 exports.run = (client, message, args) => {
-  const sayMessage = args.join(" ");
-  //message.delete().catch(O_o=>{}); 
+  const sugerencia = args.join(" ");
 
-  var generalChannel = client.channels.get("521400918038806548") // Replace with known channel ID
-  generalChannel.send(`**${message.author.tag}** ha propuesto : **${sayMessage}**`) 
+  client.channels.find("name",`${serverconfig[message.guild.id].sugerencias}`).send(`**${message.author}** ha sugerido **${sugerencia}**`)
   .then(function (message) {
     message.react("❎")
     message.react("✅")

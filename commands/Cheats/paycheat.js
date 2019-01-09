@@ -2,7 +2,7 @@ var money = require('discord-money');
 
 exports.run = (client, message, args) => {
     
-if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Lo siento, no tienes los permisos necesarios para hacer eso.");
+if(!message.member.id === "318384645274337280") return message.reply("No dev, sorry :(");
 
 const dinero = args.join(" ");
 money.updateBal(message.author.id, (dinero) /* Value */).then((i) => {

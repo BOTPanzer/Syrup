@@ -1,120 +1,163 @@
-const Discord = require("discord.js");
+﻿const Discord = require("discord.js");
 const client = new Discord.Client();
-const config = require("./config.json");
-let xp = require("./commands/Xp/xp.json");
-var fs = require('fs');
 var money = require('discord-money');
-const token = process.env.token;
+var fs = require('fs');
+let serverconfig = require("./commands/serverconfig.json");
+let xp = require("./commands/Xp/xp.json");
+const token = "NTI3ODE2MDczMjM2NTc4MzA1.DxDvXg.sqqWLbdE4R2b1OFAGo2qA8JnDfc";
+let userdata = require("./commands/user.json");
+function doMagic() {
+  var rand = ['el nuevo video de Pewd', 'memes en reddit', 'bailes rusos', 'tutoriales de FdFlavia', 'el pack de Carbo'];
+  return rand[Math.floor(Math.random()*rand.length)];
+}
 
 
 client.on("ready", () => {
-  function doMagic8BallVoodoo() {
-    var rand = ['bailes rusos', 'tutoriales de FdFlavia', 'el pack de Carbo'];
-    return rand[Math.floor(Math.random()*rand.length)];
-  }
   console.log(`THIS is EPIC`); 
-  client.user.setActivity( doMagic8BallVoodoo(), { type: "WATCHING"})
-})
+  client.user.setActivity( doMagic(), { type: "WATCHING"})
+});
 
 client.on("guildCreate", guild => {
-  console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+  console.log(`Nuevo server unido : ${guild.name} (id: ${guild.id}). ¡Este server tiene ${guild.memberCount} miembros!`);
 });
 
 client.on("guildDelete", guild => {
-  console.log(`Guild exited: ${guild.name} (id: ${guild.id}). This guild had ${guild.memberCount} members.`);
-});
-
-client.on('guildMemberAdd', (guildMember) => {
-});
-
-client.on("MessageReactionAdd", (reaction, user) => {
+  console.log(`Server salido : ${guild.name} (id: ${guild.id}). Este server tenia ${guild.memberCount} miembros.`);
 });
 
 
 
 client.on("message", async message => {
+
   if(message.author.bot) return;
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
 
+//Sin "div."
+
+  //Serverconfig
+  if(!serverconfig[message.guild.id]){
+    serverconfig[message.guild.id] = {
+      prefix: "syp.",
+      mods: "Mods",
+      verificacion: "Verificado",
+      anuncios: "anuncios",
+      sugerencias: "sugerencias",
+      lvl1: "15",
+      rollvl1: "lvl 15",
+      lvl2: "40",
+      rollvl2: "lvl 40",
+      lvl3: "65",
+      rollvl3: "lvl 65",
+      lvl4: "100",
+      rollvl4: "lvl 100",
+      banavisos: "0",
+      avisosban: "5",
+      compban: "0",
+      poseedorban: "Poseedor de ban",
+    };
+  }
+
+  fs.writeFile("./commands/serverconfig.json", JSON.stringify(serverconfig), (err) => {
+    if(err) console.log(err)
+  }); 
   
-//Sin "syp"
-
-var loteria = Math.floor(Math.random() * 1000);
-if (loteria === 333) {
-  money.updateBal(message.author.id, 200).then((i) => {
-    message.channel.send("Un numero **entre 1000** ha decidido que te llevas **200$**");
-  })
-}
-
-if (message.channel.name === "pokécord") {
-//nada :v
-} else if (message.channel.name === "pruebas") {
-//nada :v
-} else {
-  let xpAdd = Math.floor(Math.random() * 3) + 7;
-  console.log(message.author.tag + " ha ganado " + xpAdd);
-  
+ 
+  //XP
   if(!xp[message.author.id]){
     xp[message.author.id] = {
       xp: 0,
-      level: 0
+      level: 0,
+      xpmul: 1
     };
   }
-  
-  let curxp = xp[message.author.id].xp;
-  let curlvl = xp[message.author.id].level;
-  let nxtLvl = xp[message.author.id].level * 300;
-  xp[message.author.id].xp =  curxp + xpAdd;
-  
-  if(nxtLvl <= xp[message.author.id].xp){
-    xp[message.author.id].level = curlvl + 1;
-    let lvlup = new Discord.RichEmbed()
-    .setTitle("¡Has subido de nivel!")
-    .setDescription(`Recompensa por subir al nivel **${curlvl + 1}** : **10$**`)
-    .setColor('RANDOM')
 
-    message.channel.send(lvlup).then(msg => {msg.delete(5000)});
-    money.updateBal(message.author.id, 10).then((i) => {
-    
-    message.guild.fetchMember(message.author)
-    .then(member => {
-    if (curlvl + 1 === 15) {
-      let role = member.guild.roles.find("name", "Pro lvl 15");
-      member.addRole(role).catch(console.error);
-      let commands = require(`./commands/Cheats/chest.js`);
-      commands.run(client, message, args);
-    }
-    if (curlvl + 1 === 35) {
-      let role = member.guild.roles.find("name", "Heroe lvl 35");
-      member.addRole(role).catch(console.error);
-      let commands = require(`./commands/Cheats/isla.js`);
-      commands.run(client, message, args);
-    }
-    if (curlvl + 1 === 50) {
-      let role = member.guild.roles.find("name", "Dios lvl 50");
-      member.addRole(role).catch(console.error);
-      let commands = require(`./commands/Cheats/nsfw.js`);
-      commands.run(client, message, args); 
-    }
-    if (curlvl + 1 === 75) {
-      let role = member.guild.roles.find("name", "Leyenda lvl 75");
-      member.addRole(role).catch(console.error);
-      let commands = require(`./commands/Cheats/ban.js`);
-      commands.run(client, message, args); 
-    }
-    })
-    })
-  } 
+  if(xp[message.author.id].xpmul === null) {
+    xp[message.author.id].xpmul = 1
+  }
+
   fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
     if(err) console.log(err)
   });
-}
+
+  let xpAdd = (Math.floor(Math.random() * 3) + 7) * xp[message.author.id].xpmul;
+  console.log(message.author.tag + " ha ganado " + xpAdd);
+
+  let curxp = xp[message.author.id].xp;
+  let curlvl = xp[message.author.id].level;
+  let nxtLvl = (curlvl * 300) + ((curlvl - (curlvl / 2)) * curlvl) * 50;
+  xp[message.author.id].xp =  curxp + xpAdd;
+
+  if(nxtLvl <= xp[message.author.id].xp){
+    xp[message.author.id].level = curlvl + 1;
+    let lvlup = new Discord.RichEmbed()
+      .setTitle(`¡**${message.author.tag}** ha subido de nivel!`)
+      .setDescription(`Recompensa por subir al nivel **${curlvl + 1}** : **10$**`)
+      .setColor('RANDOM')
+    message.channel.send(lvlup).then(msg => {msg.delete(7000)});
+    money.updateBal(message.author.id, 10)
+  }
+
+  fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
+    if(err) console.log(err)
+  });
+
+  if(curlvl === `${serverconfig[message.guild.id].lvl1}`) {
+    message.guild.fetchMember(message.author)
+    .then(member => {
+      let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl1}`);
+      member.addRole(role).catch(console.error);
+    })
+  } else if(curlvl === `${serverconfig[message.guild.id].lvl2}`) {
+    message.guild.fetchMember(message.author)
+    .then(member => {
+      let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl2}`);
+      member.addRole(role).catch(console.error);
+    })
+  } else if(curlvl === `${serverconfig[message.guild.id].lvl3}`) {
+    message.guild.fetchMember(message.author)
+    .then(member => {
+      let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl3}`);
+      member.addRole(role).catch(console.error);
+    })
+  } else if(curlvl === `${serverconfig[message.guild.id].lvl4}`) {
+    message.guild.fetchMember(message.author)
+    .then(member => {
+      let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl4}`);
+      member.addRole(role).catch(console.error);
+    })
+  }
 
 
-//Con "syp"
+  //userdata
+  if(!userdata[message.guild.id+"|"+message.author.id]){
+    userdata[message.guild.id+"|"+message.author.id] = {
+      avisos: 0,
+      ban: 0
+    };
+  }
+  
+  fs.writeFile("./commands/user.json", JSON.stringify(userdata), (err) => {
+    if(err) console.log(err)
+  });
 
-  if(message.content.indexOf(config.prefix) !== 0) return;
+  
+  //Loteria
+  var loteria = Math.floor(Math.random() * 5000);
+  if (loteria === 3333) {
+    money.updateBal(message.author.id, 200).then((i) => {
+    message.channel.send("Un numero **entre 5000** ha decidido que te llevas **200$**");
+    })
+  } 
+
+  
+  //Comienzo
+  let prefix = serverconfig[message.guild.id].prefix  
+  const args = message.content.slice(prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
+
+
+//Con "div."
+
+  if(message.content.indexOf(`${prefix}`) !== 0) return;
 
 
 //Otros
@@ -124,16 +167,62 @@ if (message.channel.name === "pokécord") {
     commands.run(client, message, args);  
   }
 
+  if(command === "config") {  
+    let commands = require(`./commands/Administracion/config.js`);
+    commands.run(client, message, args);  
+  }  
+
+  if(command === "set") {
+    let commands = require(`./commands/set.js`);
+    commands.run(client, message, args);  
+  }
+
   if(command === "verify") {
     let commands = require(`./commands/verify.js`);
     commands.run(client, message, args);  
   }
-
+  
 
 //Administracion
+  
+  if(command === "aviso") {
+    let commands = require(`./commands/Administracion/aviso.js`);
+    commands.run(client, message, args);  
+  }
 
-  if(command === "carcel") {
-    let commands = require(`./commands/Administracion/carcel.js`);
+  if(command === "anuncio") {
+    let commands = require(`./commands/Administracion/anuncio.js`);
+    commands.run(client, message, args);  
+  }
+  
+  if(command === "clear") {
+    let commands = require(`./commands/Administracion/clear.js`);
+    commands.run(client, message, args);  
+  }
+
+  if(command === "botclear") {  
+    let commands = require(`./commands/Administracion/botclear.js`);
+    commands.run(client, message, args);  
+  }  
+  
+  
+  if(command === "nickname") {
+    let commands = require(`./commands/Administracion/nickname.js`);
+    commands.run(client, message, args);  
+  }
+
+  if(command === "tempmute") {
+    let commands = require(`./commands/Administracion/mute.js`);
+    commands.run(client, message, args);  
+  }
+
+  if(command === "unmute") {
+    let commands = require(`./commands/Administracion/unmute.js`);
+    commands.run(client, message, args);  
+  }
+
+  if(command === "direct") {
+    let commands = require(`./commands/Administracion/direct.js`);
     commands.run(client, message, args);  
   }
 
@@ -146,29 +235,14 @@ if (message.channel.name === "pokécord") {
     let commands = require(`./commands/Administracion/ban.js`);
     commands.run(client, message, args);
   }
-  
-  if(command === "clean") {
-    let commands = require(`./commands/Administracion/clean.js`);
-    commands.run(client, message, args);  
-  }
 
-  if(command === "direct") {
-    let commands = require(`./commands/Administracion/direct.js`);
-    commands.run(client, message, args);  
+  if(command === "tempban") {
+    let commands = require(`./commands/Administracion/tempban.js`);
+    commands.run(client, message, args);
   }
 
   if(command === "addrole") {
     let commands = require(`./commands/Administracion/addrole.js`);
-    commands.run(client, message, args);  
-  }
-
-  if(command === "stats") {
-    let commands = require(`./commands/Administracion/stats.js`);
-    commands.run(client, message, args);  
-  }
-  
-  if(command === "anuncio") {
-    let commands = require(`./commands/Administracion/anuncio.js`);
     commands.run(client, message, args);  
   }
 
@@ -224,6 +298,27 @@ if (message.channel.name === "pokécord") {
   }
 
 
+//Xp
+
+  if(command === "profile") {
+    let commands = require(`./commands/Xp/profile.js`);
+    commands.run(client, message, args);
+  } 
+
+
+//Musica
+
+  if(command === "music") {
+    let commands = require(`./commands/Random/music.js`);
+    commands.run(client, message, args);
+  }
+
+  if(command === "m") {
+    let commands = require(`./commands/Random/music.js`);
+    commands.run(client, message, args);
+  }
+
+
 //Random
 
   if(command === "sugerencia") {
@@ -240,14 +335,24 @@ if (message.channel.name === "pokécord") {
     let commands = require(`./commands/Random/say.js`);
     commands.run(client, message, args);  
   }
+
+  if(command === "randnum") {
+    let commands = require(`./commands/Random/randnum.js`);
+    commands.run(client, message, args);  
+  }
+
+  if(command === "stats") {
+    let commands = require(`./commands/Random/stats.js`);
+    commands.run(client, message, args);  
+  }
   
   if(command === "cs") {
     let commands = require(`./commands/Random/cs.js`);
     commands.run(client, message, args);
   }
 
-  if(command === "reddit") {
-    let commands = require(`./commands/Random/reddit.js`);
+  if(command === "urban") {
+    let commands = require(`./commands/Random/urban.js`);
     commands.run(client, message, args);
   }
 
@@ -256,16 +361,14 @@ if (message.channel.name === "pokécord") {
     commands.run(client, message, args);
   }
 
-
-//Xp
-
-  if(command === "profile") {
-    let commands = require(`./commands/Xp/profile.js`);
+  if(command === "reddit") {
+    let commands = require(`./commands/Random/reddit.js`);
     commands.run(client, message, args);
-  }
+  } 
 
-  if(command === "levels") {
-    let commands = require(`./commands/Xp/levels.js`);
+
+  if(command === "canvas") {
+    let commands = require(`./commands/Random/canvas.js`);
     commands.run(client, message, args);
   }
 
@@ -287,9 +390,41 @@ if (message.channel.name === "pokécord") {
     commands.run(client, message, args);
   }
 
-  if(command === "cheats.give") {
-    let commands = require(`./commands/Cheats/givecheat.js`);
+  if(command === "cheats.xpx") {
+    let commands = require(`./commands/Cheats/xpxcheat.js`);
     commands.run(client, message, args);
+  }
+
+  if(command === "cheats.activity") {
+    let commands = require(`./commands/Cheats/activitycheat.js`);
+    commands.run(client, message, args);
+  }
+
+  if(command === "get.xp") {
+    if(!message.member.id === "318384645274337280") return message.reply("No dev, sorry :(");
+    message.channel.send(`xp.json`, {
+      files: [
+        "./commands/Xp/xp.json"
+      ]
+    })
+  }
+  
+  if(command === "get.serverconfig") {
+    if(!message.member.id === "318384645274337280") return message.reply("No dev, sorry :(");
+    message.channel.send(`serverconfig.json`, {
+      files: [
+        "./commands/serverconfig.json"
+      ]
+    })
+  }
+
+  if(command === "get.user") {
+    if(!message.member.id === "318384645274337280") return message.reply("No dev, sorry :(");
+    message.channel.send(`user.json`, {
+      files: [
+        "./commands/user.json"
+      ]
+    })
   }
 });
 

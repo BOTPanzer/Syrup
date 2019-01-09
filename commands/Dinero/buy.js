@@ -1,252 +1,164 @@
+const Discord = require("discord.js");
 var money = require('discord-money');
+let xp = require("../Xp/xp.json");
+let serverconfig = require("../serverconfig.json");
+let userdata = require("../user.json");
+var fs = require('fs');
+const ms = require("ms");
 
 exports.run = (client, message, args) => {
 
 const objeto = args.join(" ");
-var anuncios = client.channels.get("525783411961364484")
 const nomoney = ("No tienes suficiente dinero para hacer eso.");
+let prfix = "`" + serverconfig[message.guild.id].prefix
 
   if (objeto === "") { 
-    message.channel.send("Escoge un objeto. `syp.buy (objeto)`.");
+    message.channel.send("Escoge un objeto.");
   }
 
-  if(objeto === "ban") {
+  if(objeto === "XPx2") {
     money.fetchBal(message.author.id).then((i) => {
-    if (i.money > 2000) {
+    if (i.money > 750) {
+      let curmul = xp[message.author.id].xpmul;
+      if(curmul === 512) {
+        return message.channel.send("Te pasas men. No crees que **x512** es suficiente???")
+      }
+      money.updateBal(message.author.id, -750).then((i) => {
       message.guild.fetchMember(message.author)
       .then(member => {
-        let role = member.guild.roles.find("name", "Poseedor de BAN");
-        member.addRole(role).catch(console.error);
-        money.updateBal(message.author.id, -2000 /* Value */).then((i) => {
-        message.channel.send("**Ban** comprado correctamente. Ya tienes permiso para usar el comando `syp.ban (miembro) (razón)` 1 vez.");
-        anuncios.send(`**${member.user.tag}** ha comprado un BAN. ¡¡Mantened el orto cerrado porque no tendrá piedad!!`) 
-        })
-      })
-    } else {
-      message.channel.send(nomoney);
-    }
-    })
-  }
+       
+        let tiempo = "1d"
+        xp[message.author.id].xpmul = curmul * 2
 
-  if(objeto === "nsfw") {
-    money.fetchBal(message.author.id).then((i) => {
-    if (i.money > 1500) {
-      message.guild.fetchMember(message.author)
-      .then(member => {
-        let role = member.guild.roles.find("name", "NSFW leader");
-        member.addRole(role).catch(console.error);
-        money.updateBal(message.author.id, -1500 /* Value */).then((i) => {
-        message.channel.send("**NSFW** comprado correctamente. Ya tienes permiso para usar comandos de Syrup NSFW en canales que no lo son.");
-        anuncios.send(`**${member.user.tag}** ha comprado NSFW. ¡¡Alejaos de los familiares porque no dudará en trollear!!`) 
-        })
-      })
-    } else {
-      message.channel.send(nomoney);
-    }
-    })
-  }
+        fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
+        if(err) console.log(err)
+        });
 
-  if(objeto === "isla 1") {
-    var islaid = client.channels.get("525791138284699650")
-    money.fetchBal(message.author.id).then((i) => {
-    if (i.money > 750) {
-      if (islaid.name === "isla-1") {
-        message.guild.fetchMember(message.author)
-        .then(member => {
-          let role = member.guild.roles.find("name", "Isla 1");
-          member.addRole(role).catch(console.error);
-          money.updateBal(message.author.id, -750 /* Value */).then((i) => {
-          message.channel.send("**Isla** comprada correctamente. Disfruta del vacio de tu isla.");
-          islaid.setName(`Isla de ${member.user.tag}`)
-          anuncios.send(`¡¡**${member.user.tag}** ha comprado una isla para no escucharos pedir limosna!!`) 
-          })
-        })
-      } else {
-        message.channel.send("Esa isla ya está comprada.");
-      }
-    } else {
-      message.channel.send(nomoney);
-    }
-    })
-  }
+        let comprado = new Discord.RichEmbed()
+        .setTitle(`¡**${message.author.tag}** ha comprado XPx2!`)
+        .setDescription(`Ahora tu xp subira el doble de rapido. | **XP : x${xp[message.author.id].xpmul}**`)
+        .setColor('RANDOM')
+        message.channel.send(comprado).then(msg => {msg.delete(7000)});
 
-  if(objeto === "isla 2") {
-    var islaid = client.channels.get("525791169385332756")
-    money.fetchBal(message.author.id).then((i) => {
-    if (i.money > 750) {
-      if (islaid.name === "isla-2") {
-        message.guild.fetchMember(message.author)
-        .then(member => {
-          let role = member.guild.roles.find("name", "Isla 2");
-          member.addRole(role).catch(console.error);
-          money.updateBal(message.author.id, -750 /* Value */).then((i) => {
-          message.channel.send("**Isla** comprada correctamente. Disfruta del vacio de tu isla.");
-          islaid.setName(`Isla de ${member.user.tag}`)
-          anuncios.send(`¡¡**${member.user.tag}** ha comprado una isla para no escucharos pedir limosna!!`) 
-          })
-        })
-      } else {
-        message.channel.send("Esa isla ya está comprada.");
-      }
-    } else {
-      message.channel.send(nomoney);
-    }
-    })
-  }
-  
-  if(objeto === "isla 3") {
-    var islaid = client.channels.get("525791186661670928")
-    money.fetchBal(message.author.id).then((i) => {
-    if (i.money > 750) {
-      if (islaid.name === "isla-3") {
-        message.guild.fetchMember(message.author)
-        .then(member => {
-          let role = member.guild.roles.find("name", "Isla 3");
-          member.addRole(role).catch(console.error);
-          money.updateBal(message.author.id, -750 /* Value */).then((i) => {
-          message.channel.send("**Isla** comprada correctamente. Disfruta del vacio de tu isla.");
-          islaid.setName(`Isla de ${member.user.tag}`)
-          anuncios.send(`¡¡**${member.user.tag}** ha comprado una isla para no escucharos pedir limosna!!`) 
-          })
-        })
-      } else {
-        message.channel.send("Esa isla ya está comprada.");
-      }
-    } else {
-      message.channel.send(nomoney);
-    }
-    })
-  }
-  
-  if(objeto === "isla 4") {
-    var islaid = client.channels.get("525793642548428824")
-    money.fetchBal(message.author.id).then((i) => {
-    if (i.money > 750) {
-      if (islaid.name === "isla-4") {
-        message.guild.fetchMember(message.author)
-        .then(member => {
-          let role = member.guild.roles.find("name", "Isla 4");
-          member.addRole(role).catch(console.error);
-          money.updateBal(message.author.id, -750 /* Value */).then((i) => {
-          message.channel.send("**Isla** comprada correctamente. Disfruta del vacio de tu isla.");
-          islaid.setName(`Isla de ${member.user.tag}`)
-          anuncios.send(`¡¡**${member.user.tag}** ha comprado una isla para no escucharos pedir limosna!!`) 
-          })
-        })
-      } else {
-        message.channel.send("Esa isla ya está comprada.");
-      }
-    } else {
-      message.channel.send(nomoney);
-    }
-    })
-  }
-
-  if(objeto === "chest") {
-    money.fetchBal(message.author.id).then((i) => {
-    if (i.money > 25) {
-        message.guild.fetchMember(message.author)
-        .then(member => {
-          money.updateBal(message.author.id, -25 /* Value */).then((i) => {
-          message.channel.send("Has comprado un cofre.");
-          var numb = Math.floor(Math.random() * 100);
-          if (numb < 11) {
-            message.channel.send("No has ganado nada");
-          } else if (numb < 21) {
-            money.updateBal(message.author.id, 10 /* Value */).then((i) => {
-            message.channel.send("Has ganado 10$");
-            })
-          } else if (numb < 36) {
-            money.updateBal(message.author.id, 15 /* Value */).then((i) => {
-            message.channel.send("Has ganado 15$");
-            })
-          } else if (numb < 37) {
-
-            let role = member.guild.roles.find("name", "Poseedor de BAN");
-            member.addRole(role).catch(console.error);
-            message.channel.send("Has ganado **un BAN**");
-            anuncios.send(`**${member.user.tag}** ha ganado un BAN en un cofre. ¡¡Mantened el orto cerrado porque no tendrá piedad!!`) 
-
-          } else if (numb < 52) {
-            money.updateBal(message.author.id, 20 /* Value */).then((i) => {
-            message.channel.send("Has ganado 20$");
-            })
-          } else if (numb < 53) {
-            let role = member.guild.roles.find("name", "NSFW leader");
-            member.addRole(role).catch(console.error);
-            message.channel.send("Has ganado **NSFW**");
-            anuncios.send(`**${member.user.tag}** ha ganado NSFW. ¡¡Alejaos de los familiares porque no dudará en trollear!!`) 
-
-          } else if (numb < 73) {
-            money.updateBal(message.author.id, 25 /* Value */).then((i) => {
-            message.channel.send("Has ganado 25$");
-            })
-          } else if (numb < 75) {
-
-            var isla1 = client.channels.get("525791138284699650")
-            var isla2 = client.channels.get("525791169385332756")
-            var isla3 = client.channels.get("525791186661670928")
-            var isla4 = client.channels.get("525793642548428824")
-
-            if (isla1.name === "isla-1") {
-              message.guild.fetchMember(message.author)
-              .then(member => {
-                let role = member.guild.roles.find("name", "Isla 1");
-                member.addRole(role).catch(console.error);
-                message.channel.send("Has ganado **una isla** en el cofre. Disfruta del vacio de tu isla.");
-                isla1.setName(`Isla de ${member.user.tag}`)
-                anuncios.send(`¡¡**${member.user.tag}** ha ganado una isla. ¡¡Ya no tendrá que escucharos!!`) 
-                })
-            } else if (isla2.name === "isla-2") {
-              message.guild.fetchMember(message.author)
-              .then(member => {
-                let role = member.guild.roles.find("name", "Isla 2");
-                member.addRole(role).catch(console.error);
-                message.channel.send("Has ganado **una isla** en el cofre. Disfruta del vacio de tu isla.");
-                isla2.setName(`Isla de ${member.user.tag}`)
-                anuncios.send(`¡¡**${member.user.tag}** ha ganado una isla. ¡¡Ya no tendrá que escucharos!!`) 
-                })
-            } else if (isla3.name === "isla-3") {
-              message.guild.fetchMember(message.author)
-              .then(member => {
-                let role = member.guild.roles.find("name", "Isla 3");
-                member.addRole(role).catch(console.error);
-                message.channel.send("Has ganado **una isla** en el cofre. Disfruta del vacio de tu isla.");
-                isla3.setName(`Isla de ${member.user.tag}`)
-                anuncios.send(`¡¡**${member.user.tag}** ha ganado una isla. ¡¡Ya no tendrá que escucharos!!`) 
-                })
-            } else if (isla4.name === "isla-4") {
-              message.guild.fetchMember(message.author)
-              .then(member => {
-                let role = member.guild.roles.find("name", "Isla 4");
-                member.addRole(role).catch(console.error);
-                message.channel.send("Has ganado **una isla** en el cofre. Disfruta del vacio de tu isla.");
-                isla4.setName(`Isla de ${member.user.tag}`)
-                anuncios.send(`¡¡**${member.user.tag}** ha ganado una isla. ¡¡Ya no tendrá que escucharos!!`) 
-                })
-            } else {
-              message.channel.send("Has ganado isla pero todas las islas estan compradas. :(");
-            }
-          } else if (numb < 85) {
-            money.updateBal(message.author.id, 30 /* Value */).then((i) => {
-            message.channel.send("Has ganado 30$");
-            })
-          } else if (numb < 95) {
-            money.updateBal(message.author.id, 50 /* Value */).then((i) => {
-            message.channel.send("Has ganado 50$");
-            })
-          } else if (numb < 100) {
-            money.updateBal(message.author.id, 100 /* Value */).then((i) => {
-            message.channel.send("Has ganado 100$");
-            })
-          } else if (numb < 101) {
-            message.channel.send("Tu regalo está detras tullo");
+        setTimeout(function(){
+          if(xp[message.author.id].xpmul === 2) {
+            xp[message.author.id].xpmul = 1
+          } else if(xp[message.author.id].xpmul === 4) {
+            xp[message.author.id].xpmul = 2
+          } else if(xp[message.author.id].xpmul === 8) {
+            xp[message.author.id].xpmul = 4
+          } else if(xp[message.author.id].xpmul === 16) {
+            xp[message.author.id].xpmul = 8
+          } else if(xp[message.author.id].xpmul === 32) {
+            xp[message.author.id].xpmul = 16
+          } else if(xp[message.author.id].xpmul === 64) {
+            xp[message.author.id].xpmul = 32
+          } else if(xp[message.author.id].xpmul === 128) {
+            xp[message.author.id].xpmul = 64
+          } else if(xp[message.author.id].xpmul === 256) {
+            xp[message.author.id].xpmul = 128
+          } else if(xp[message.author.id].xpmul === 512) {
+            xp[message.author.id].xpmul = 256
+          } else if(xp[message.author.id].xpmul < 1) {
+            xp[message.author.id].xpmul = 1
           }
-          })
+
+          fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
+            if(err) console.log(err)
+            });
+        }, ms(tiempo));
+      })
+      })
+    } else {
+      message.channel.send(nomoney);
+    }
+    })
+  }
+
+  if(objeto === "1lvl") {
+    money.fetchBal(message.author.id).then((i) => {
+    if (i.money > 350) {
+      money.updateBal(message.author.id, -350).then((i) => {
+      message.guild.fetchMember(message.author)
+      .then(member => {
+        
+        let curxp = xp[message.author.id].xp;
+        let curlvl = xp[message.author.id].level;
+        let nxtLvl = (curlvl * 300) + ((curlvl - (curlvl / 2)) * curlvl) * 50;
+        xp[message.author.id].xp = nxtLvl;
+        xp[message.author.id].level = curlvl + 1;
+        let lvlup = new Discord.RichEmbed()
+          .setTitle(`¡**${message.author.tag}** ha subido de nivel!`)
+          .setDescription(`Recompensa por subir al nivel **${curlvl + 1}** : **10$**`)
+          .setColor('RANDOM')
+        message.channel.send(lvlup).then(msg => {msg.delete(7000)});
+        money.updateBal(message.author.id, 10)
+
+        fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
+        if(err) console.log(err)
+        });
+      })
+      })
+    } else {
+      message.channel.send(nomoney);
+    }
+    })
+  }
+
+  if(objeto === "5lvls") {
+    money.fetchBal(message.author.id).then((i) => {
+    if (i.money > 1600) {
+      money.updateBal(message.author.id, -350).then((i) => {
+        message.guild.fetchMember(message.author)
+        .then(member => {
+          
+          let curxp = xp[message.author.id].xp;
+          let curlvl = xp[message.author.id].level;
+          let lvl5mas = curlvl + 4
+          let nxtLvl = (lvl5mas * 300) + ((lvl5mas - (lvl5mas / 2)) * lvl5mas) * 50;
+          xp[message.author.id].xp = nxtLvl;
+          xp[message.author.id].level = curlvl + 5;
+          let lvlup = new Discord.RichEmbed()
+            .setTitle(`¡**${message.author.tag}** ha subido de nivel!`)
+            .setDescription(`Recompensa por subir al nivel **${curlvl + 5}** : **50$**`)
+            .setColor('RANDOM')
+          message.channel.send(lvlup).then(msg => {msg.delete(7000)});
+          money.updateBal(message.author.id, 50)
+  
+          fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
+          if(err) console.log(err)
+          });
+        })
         })
     } else {
       message.channel.send(nomoney);
     }
     })
   }
+
+  if(serverconfig[message.guild.id].compban === "1") {
+    if(objeto === "ban") {
+      money.fetchBal(message.author.id).then((i) => {
+      if (i.money > 2400) {
+        if (!userdata[message.guild.id+"|"+message.author.id].ban === 1) {
+        money.updateBal(message.author.id, -2400).then((i) => {
+        message.guild.fetchMember(message.author)
+        .then(member => {
+          userdata[message.guild.id+"|"+message.author.id].ban = 1
+          fs.writeFile("./commands/user.json", JSON.stringify(userdata), (err) => {
+            if(err) console.log(err)
+          });
+          message.channel.send("**Ban** comprado correctamente. Ya tienes permiso para **usar el comando** " + prfix + "ban <miembro> <razón opcional>` **1 vez**.\nSolo puedes banear a gente con **menor o igual rol que tú**.");
+        })
+      })
+      } else {
+        message.channel.send("Ya tienes un **Ban** en tu posesión, no vaciles.")
+      }
+      } else {
+        message.channel.send(nomoney);
+      }
+      })
+    }
+  }
+
 }

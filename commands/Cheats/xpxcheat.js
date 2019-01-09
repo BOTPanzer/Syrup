@@ -3,14 +3,15 @@ var fs = require('fs');
 
 exports.run = (client, message, args) => {
 
-  if(!message.member.id === "318384645274337280") return message.reply("No dev, sorry :(");
+if(!message.member.id === "318384645274337280") return message.reply("No dev, sorry :(");
+
 
 const cheat = args.join(" ");
+if(!cheat) return
 const num = cheat * 1
-let curxp = xp[message.author.id].xp;
-xp[message.author.id].xp = curxp + num;
+xp[message.author.id].xpmul = num
 
 fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
   if(err) console.log(err)
-});
+  });
 }
