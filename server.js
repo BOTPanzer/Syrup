@@ -51,8 +51,7 @@ client.on("message", async message => {
       rollvl4: "lvl 100",
       banavisos: "0",
       avisosban: "5",
-      compban: "0",
-      poseedorban: "Poseedor de ban",
+      compban: "0"
     };
   }
 

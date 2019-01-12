@@ -6,7 +6,7 @@ let userdata = require("../user.json");
 var fs = require('fs');
 const ms = require("ms");
 
-exports.run = (client, message, args) => {
+module.exports.run = async (client, message, args) => {
 
 const objeto = args.join(" ");
 const nomoney = ("No tienes suficiente dinero para hacer eso.");
@@ -108,7 +108,7 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
   if(objeto === "5lvls") {
     money.fetchBal(message.author.id).then((i) => {
     if (i.money > 1600) {
-      money.updateBal(message.author.id, -350).then((i) => {
+      money.updateBal(message.author.id, -1600).then((i) => {
         message.guild.fetchMember(message.author)
         .then(member => {
           
@@ -159,6 +159,67 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
       }
       })
     }
+  }
+
+  if(objeto === "hotel") {
+    money.fetchBal(message.author.id).then((i) => {
+    if (i.money > 350) {
+        message.guild.fetchMember(message.author)
+        .then(member => {
+          
+          if(client.channels.get("533668911405727764").name === "habitación-1"){
+
+            money.updateBal(message.author.id, -350)
+            client.channels.get("533668911405727764").setName(`habitación-de-${message.author.tag}`);
+            let roole = message.guild.roles.find(`name`, "Habitacion 1");
+            member.addRole(roole.id)
+            setTimeout(function(){
+              client.channels.get("533668911405727764").setName(`habitación-1`);
+              member.removeRole(roole.id)
+            }, ms("5d"));
+
+          } else if(client.channels.get("533668935015333888").name === "habitación-2"){
+
+            money.updateBal(message.author.id, -350)
+            client.channels.get("533668935015333888").setName(`habitación-de-${message.author.tag}`);
+            let roole = message.guild.roles.find(`name`, "Habitacion 2");
+            member.addRole(roole.id)
+            setTimeout(function(){
+              client.channels.get("533668935015333888").setName(`habitación-2`);
+              member.removeRole(roole.id)
+            }, ms("5d"));
+
+          } else if(client.channels.get("533668956398157885").name === "habitación-3"){
+
+            money.updateBal(message.author.id, -350)
+            client.channels.get("533668956398157885").setName(`habitación-de-${message.author.tag}`);
+            let roole = message.guild.roles.find(`name`, "Habitacion 3");
+            member.addRole(roole.id)
+            setTimeout(function(){
+              client.channels.get("533668956398157885").setName(`habitación-3`);
+              member.removeRole(roole.id)
+            }, ms("5d"));
+
+          } else if(client.channels.get("533668977856086018").name === "habitación-4"){
+
+            money.updateBal(message.author.id, -350)
+            client.channels.get("533668977856086018").setName(`habitación-de-${message.author.tag}`);
+            let roole = message.guild.roles.find(`name`, "Habitacion 4");
+            member.addRole(roole.id)
+            setTimeout(function(){
+              client.channels.get("533668977856086018").setName(`habitación-4`);
+              member.removeRole(roole.id)
+            }, ms("5d"));
+
+          } else {
+            message.channel.send("No hay habitaciones disponibles.")
+          }
+
+        })
+    } else {
+      message.channel.send(nomoney);
+    }
+    })
   }
 
 }
