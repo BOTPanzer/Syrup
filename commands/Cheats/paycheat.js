@@ -6,6 +6,6 @@ if(!message.member.id === "318384645274337280") return message.reply("No dev, so
 
 const dinero = args.join(" ");
 money.updateBal(message.author.id, (dinero) /* Value */).then((i) => {
-message.channel.send(`**¡Se ha realizado un cambio de ${dinero}$!**\n**Banco :** ${i.money}$`);
+message.channel.send(`¡Se ha realizado un cambio de **${dinero}$**!\nBanco : **${i.money}$**`);
 })
 }
