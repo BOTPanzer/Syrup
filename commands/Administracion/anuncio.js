@@ -9,5 +9,5 @@ exports.run = (bot, message, args) => {
 
   const anuncio = args.join(" ");
   if(!anuncio) return message.channel.send("No se ha proporcionado un anuncio");
-  bot.channels.find("name",`${serverconfig[message.guild.id].anuncios}`).send(`**${anuncio}**`) 
+  bot.channels.find("name",`${serverconfig[message.guild.id].anuncios}`).send(`${anuncio}`) 
 }

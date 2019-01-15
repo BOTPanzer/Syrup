@@ -1,6 +1,6 @@
 var money = require('discord-money');
-const ms = require("ms");
-const Discord = require('discord.js');
+var fs = require('fs');
+let banco = require("../bancoserver.json");
 const quiz = [
   { q: "!Un robo ha empezado¡ ¡Ayuda diciendo **stop** para pararlo!", a: ["stop"] }
 ];
@@ -14,8 +14,8 @@ module.exports.run = async (bot, message, args) => {
   
   
   const item = quiz[Math.floor(Math.random() * quiz.length)];
-  let dinerorob = (Math.floor(Math.random() * 51) + 65)
-  message.channel.send("!Un robo ha empezado¡ ¡Ayuda diciendo **stop** para pararlo!")
+  let dinerorob = banco[message.guild.id].dinero
+  message.channel.send("@everyone ¡Un robo ha empezado! ¡Ayuda diciendo **stop** para pararlo!")
 
   try {
     let hecho = 0
@@ -34,5 +34,9 @@ module.exports.run = async (bot, message, args) => {
   } catch (_) {
     message.channel.send(`💰${message.author} ha robado el banco y ganado **${dinerorob}$**.`)
     money.updateBal(message.author.id, dinerorob)
+    banco[message.guild.id].dinero = 0
+    fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {
+      if(err) console.log(err)
+    }); 
   }
 }

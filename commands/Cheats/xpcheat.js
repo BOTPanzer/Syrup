@@ -3,7 +3,7 @@ var fs = require('fs');
 
 exports.run = (client, message, args) => {
 
-  if(!message.member.id === "318384645274337280") return message.reply("No dev, sorry :(");
+  if(!message.member.id === "318384645274337280") return;
 
 const cheat = args.join(" ");
 const num = cheat * 1

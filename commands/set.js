@@ -25,6 +25,18 @@ module.exports.run = async (client, message, args) => {
   } else if (confg === "sugerencias") {   //Canal sugerencias
     serverconfig[message.guild.id].sugerencias = nomb
     message.channel.send(`Canal de *sugerencias* cambiado a **${nomb}**`)
+  } else if (confg === "welcome") {   //Canal bienvenida
+    serverconfig[message.guild.id].welcome = nomb
+    message.channel.send(`Canal de *welcome* cambiado a **${nomb}**`)
+  } else if (confg === "banavisos") {   //Ban avisos
+    serverconfig[message.guild.id].banavisos = nomb
+    message.channel.send(`*banavisos* cambiado a **${nomb}**`)
+  } else if (confg === "avisosban") {   //Avisos ban
+    serverconfig[message.guild.id].avisosban = nomb
+    message.channel.send(`*avisosban* cambiados a **${nomb}**`)
+  } else if (confg === "invitacion") {   //Invitación
+    serverconfig[message.guild.id].invitacion = nomb
+    message.channel.send(`*Invitacion* del server cambiada a **${nomb}**`)
   } else if (confg === "lvl1") {   //lvl 1
     serverconfig[message.guild.id].lvl1 = nomb
     message.channel.send(`*lvl1* cambiado a **${nomb}**`)
@@ -49,18 +61,9 @@ module.exports.run = async (client, message, args) => {
   } else if (confg === "rollvl4") {   //rol lvl 4
     serverconfig[message.guild.id].rollvl4 = nomb
     message.channel.send(`*rollvl4* cambiado a **${nomb}**`)
-  } else if (confg === "banavisos") {   //Ban avisos
-    serverconfig[message.guild.id].banavisos = nomb
-    message.channel.send(`*banavisos* cambiado a **${nomb}**`)
-  } else if (confg === "avisosban") {   //Avisos ban
-    serverconfig[message.guild.id].avisosban = nomb
-    message.channel.send(`*avisosban* cambiados a **${nomb}**`)
   } else if (confg === "comprar.ban") {   //Comprar ban
     serverconfig[message.guild.id].compban = nomb
     message.channel.send(`*comprar.ban* en tienda cambiado a **${nomb}**`)
-  } else if (confg === "ban") {   //Rol ban 
-    serverconfig[message.guild.id].poseedorban = nomb
-    message.channel.send(`Rol *ban* cambiado a **${nomb}**`)
   } else {
     message.channel.send("**No se ha encontrado lo que quieres cambiar**. Selecciona **un apartado en *cursiva*** de la **configuración del server** (comando : " + "`" + serverconfig[message.guild.id].prefix + "config`). | EJ : `" + serverconfig[message.guild.id].prefix + "set prefijo div.` (cambia el prefijo a `div.`).")
   }

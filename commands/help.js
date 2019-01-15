@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
         let botembed = new Discord.RichEmbed()
             .setThumbnail(bicon)
             .setTitle("💰Comandos Dinero =")
-            .setDescription(prfix + "bank :` 🏛Te dice el **dinero que tienes** en el banco.\n" + prfix + "rob :` 💼Robas entre **65$ y 115$** del banco. ⏳Se tarda **1min** y si alguien dice **stop** para el robo y **te ponen una multa de 35$**.\n" + prfix + "daily :` 💵Te da **50$** diarios.\n" + prfix + "shop :` ⚖Abre la **tienda** de Divot\n" + prfix + "buy <objeto> :` 💳**Compra** el **objeto** seleccionado **de la tienda**.")
+            .setDescription(prfix + "bank <server opcional> :` 🏛Te dice el **dinero que tienes o que tiene el server** en el banco.\n" + prfix + "rob :` 💼Robas **el dinero del banco del server**. ⏳Se tarda **1min** y si alguien dice **stop** se para el robo y **te ponen una multa de 35$**.\n" + prfix + "daily :` 💵Te da **50$** diarios.\n" + prfix + "shop :` ⚖Abre la **tienda** de Divot\n" + prfix + "buy <objeto> :` 💳**Compra** el **objeto** seleccionado **de la tienda**.\n" + prfix + "donate <miembro> <cantidad> :` 💸**Dona** la **cantidad seleccionada** al **miembro seleccionado**.")
             .setColor('RANDOM');
     
         message.channel.send(botembed);
@@ -76,17 +76,17 @@ module.exports.run = async (bot, message, args) => {
         message.channel.send(botembed);
     } else if(hlp === "cheats") {
         message.delete().catch(O_o=>{}); 
-        if(!message.member.id === "318384645274337280") return
+        if(!message.member.id === "318384645274337280") return;
         let bicon = bot.user.displayAvatarURL;
         let pfx = serverconfig[message.guild.id].prefix
         let prfix = "`" + pfx
         let botembed = new Discord.RichEmbed()
             .setThumbnail(bicon)
             .setTitle("💻Comandos Cheats =")
-            .setDescription(prfix + "cheats.pay <dineros> :` El dinero es dinero, aprende algo dinero.\n" + prfix + "cheats.xp <num> :` The higher the better.\n" + prfix + "cheats.xpx <num> :` Same as the previous one.\n" + prfix + "cheats.levels <num> :` Its me, Mario.\n" + prfix + "cheats.activity :` чечевица имеет железо.\n" + prfix + "get.xp/user/serverconfig :` Pos lo ke dise el comando.")
+            .setDescription(prfix + "cheats.pay <dineros> :` El dinero es dinero, aprende algo dinero.\n" + prfix + "cheats.xp <num> :` The higher the better.\n" + prfix + "cheats.xpx <num> :` Same as the previous one.\n" + prfix + "cheats.levels <num> :` Its me, Mario.\n" + prfix + "cheats.xpx :` multiplicate por cero.\n" + prfix + "cheats.activity :` чечевица имеет железо.\n" + prfix + "get <xp/user/serverconfig> :` Pos lo ke dise el comando.\n" + prfix + "start.money :` Empieza a funcionar la economia comunista.")
             .setColor('RANDOM');
     
-        message.channel.send(botembed).then(msg => {msg.delete(5000)});
+        message.channel.send(botembed).then(msg => {msg.delete(7000)});
     } else {
     let bicon = bot.user.displayAvatarURL;
     let pfx = serverconfig[message.guild.id].prefix

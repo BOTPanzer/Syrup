@@ -1,13 +1,14 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const token = process.env.token;
 var money = require('discord-money');
 var fs = require('fs');
 let serverconfig = require("./commands/serverconfig.json");
 let xp = require("./commands/Xp/xp.json");
-const token = process.env.token;
 let userdata = require("./commands/user.json");
+let banco = require("./commands/bancoserver.json");
 function doMagic() {
-  var rand = ['el nuevo video de Pewd', 'memes en reddit', 'bailes rusos', 'tutoriales de FdFlavia', 'el pack de Carbo'];
+  var rand = ['el nuevo video de Pewd', 'memes en reddit', 'bailes rusos', 'tutoriales de FdFlavia', 'el pack de Carbo', 'anime tiddies', 'a Ricardo bailando', '...  ¿Me perdonas?', 'a el calvo de Cepeda'];
   return rand[Math.floor(Math.random()*rand.length)];
 }
 
@@ -37,10 +38,14 @@ client.on("message", async message => {
   if(!serverconfig[message.guild.id]){
     serverconfig[message.guild.id] = {
       prefix: "syp.",
-      mods: "Mods",
+      mods: "Moderadores",
       verificacion: "Verificado",
       anuncios: "anuncios",
       sugerencias: "sugerencias",
+      welcome: "general",
+      banavisos: "0",
+      avisosban: "5",
+      invitacion: "(pon tu url aqui)",
       lvl1: "15",
       rollvl1: "lvl 15",
       lvl2: "40",
@@ -49,8 +54,6 @@ client.on("message", async message => {
       rollvl3: "lvl 65",
       lvl4: "100",
       rollvl4: "lvl 100",
-      banavisos: "0",
-      avisosban: "5",
       compban: "0"
     };
   }
@@ -139,6 +142,19 @@ client.on("message", async message => {
   });
 
   
+  //Banco server
+
+  if(!banco[message.guild.id]){
+    banco[message.guild.id] = {
+      dinero: 0
+    };
+  }
+  
+  fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {
+    if(err) console.log(err)
+  });
+
+
   //Loteria
   var loteria = Math.floor(Math.random() * 5000);
   if (loteria === 3333) {
@@ -281,6 +297,11 @@ client.on("message", async message => {
     commands.run(client, message, args);
   }
 
+  if(command === "rob") {
+    let commands = require(`./commands/Dinero/robbery.js`);
+    commands.run(client, message, args);
+  }
+
   if(command === "daily") {
     let commands = require(`./commands/Dinero/daily.js`);
     commands.run(client, message, args);
@@ -296,8 +317,8 @@ client.on("message", async message => {
     commands.run(client, message, args);
   }
 
-  if(command === "rob") {
-    let commands = require(`./commands/Dinero/robbery.js`);
+  if(command === "donate") {
+    let commands = require(`./commands/Dinero/donate.js`);
     commands.run(client, message, args);
   }
 
@@ -404,31 +425,14 @@ client.on("message", async message => {
     commands.run(client, message, args);
   }
 
-  if(command === "get.xp") {
-    if(!message.member.id === "318384645274337280") return message.reply("No dev, sorry :(");
-    message.channel.send(`xp.json`, {
-      files: [
-        "./commands/Xp/xp.json"
-      ]
-    })
-  }
-  
-  if(command === "get.serverconfig") {
-    if(!message.member.id === "318384645274337280") return message.reply("No dev, sorry :(");
-    message.channel.send(`serverconfig.json`, {
-      files: [
-        "./commands/serverconfig.json"
-      ]
-    })
+  if(command === "get") {
+    let commands = require(`./commands/Cheats/get.js`);
+    commands.run(client, message, args);
   }
 
-  if(command === "get.user") {
-    if(!message.member.id === "318384645274337280") return message.reply("No dev, sorry :(");
-    message.channel.send(`user.json`, {
-      files: [
-        "./commands/user.json"
-      ]
-    })
+  if(command === "start.money") {
+    let commands = require(`./commands/Cheats/startmoney.js`);
+    commands.run(client, message, args);
   }
 });
 

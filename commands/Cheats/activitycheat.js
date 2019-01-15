@@ -5,7 +5,7 @@ function doMagic() {
 
 exports.run = (client, message, args) => {
 
-if(!message.member.id === "318384645274337280") return message.reply("No dev, sorry :(");
+if(!message.member.id === "318384645274337280") return;
 
 if(!args[0]) {
   client.user.setActivity( doMagic(), { type: "WATCHING"})

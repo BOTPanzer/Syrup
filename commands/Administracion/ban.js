@@ -31,6 +31,8 @@ module.exports.run = async (client, message, args) => {
     let reason = args.slice(1).join(' ');
     if(!reason) reason = "(no se ha proporcionado una razón)";
 
+    await member.send(`Has sido baneado de **${message.channel.guild}** por **1 dia** porque alguien **ha gastado un ban en ti**. **Utiliza esta invitación** mañana para unirte de nuevo. ${serverconfig[message.guild.id].invitacion}`)
+
     await member.ban(reason)
       .catch(error => message.channel.send(`Lo siento **${message.author}**. No he podido banear por : ${error}`));
       message.channel.send(`**${member.user}** ha sido baneado por **${message.author}** por **${reason}**`);
