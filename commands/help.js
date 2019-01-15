@@ -83,7 +83,7 @@ module.exports.run = async (bot, message, args) => {
         let botembed = new Discord.RichEmbed()
             .setThumbnail(bicon)
             .setTitle("💻Comandos Cheats =")
-            .setDescription(prfix + "cheats.pay <dineros> :` El dinero es dinero, aprende algo dinero.\n" + prfix + "cheats.xp <num> :` The higher the better.\n" + prfix + "cheats.xpx <num> :` Same as the previous one.\n" + prfix + "cheats.levels <num> :` Its me, Mario.\n" + prfix + "cheats.xpx :` multiplicate por cero.\n" + prfix + "cheats.activity :` чечевица имеет железо.\n" + prfix + "get <xp/user/serverconfig> :` Pos lo ke dise el comando.\n" + prfix + "start.money :` Empieza a funcionar la economia comunista.")
+            .setDescription(prfix + "cheats.pay <dineros> <algo para server> :` El dinero es dinero, aprende algo dinero.\n" + prfix + "cheats.xp <num> :` The higher the better.\n" + prfix + "cheats.xpx <num> :` Same as the previous one.\n" + prfix + "cheats.levels <num> :` Its me, Mario.\n" + prfix + "cheats.xpx :` multiplicate por cero.\n" + prfix + "cheats.activity :` чечевица имеет железо.\n" + prfix + "get <xp/user/serverconfig/banco> :` Pos lo ke dise el comando.\n" + prfix + "start.money :` Empieza a funcionar la economia comunista.")
             .setColor('RANDOM');
     
         message.channel.send(botembed).then(msg => {msg.delete(7000)});
