@@ -54,7 +54,9 @@ client.on("message", async message => {
       rollvl3: "lvl 65",
       lvl4: "100",
       rollvl4: "lvl 100",
-      compban: "0"
+      compban: "0",
+      mtime: "2h",
+      mmoney: "5"
     };
   }
 

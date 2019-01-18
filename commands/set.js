@@ -37,6 +37,7 @@ module.exports.run = async (client, message, args) => {
   } else if (confg === "invitacion") {   //Invitación
     serverconfig[message.guild.id].invitacion = nomb
     message.channel.send(`*Invitacion* del server cambiada a **${nomb}**`)
+
   } else if (confg === "lvl1") {   //lvl 1
     serverconfig[message.guild.id].lvl1 = nomb
     message.channel.send(`*lvl1* cambiado a **${nomb}**`)
@@ -61,9 +62,16 @@ module.exports.run = async (client, message, args) => {
   } else if (confg === "rollvl4") {   //rol lvl 4
     serverconfig[message.guild.id].rollvl4 = nomb
     message.channel.send(`*rollvl4* cambiado a **${nomb}**`)
+
   } else if (confg === "comprar.ban") {   //Comprar ban
     serverconfig[message.guild.id].compban = nomb
     message.channel.send(`*comprar.ban* en tienda cambiado a **${nomb}**`)
+  } else if (confg === "tiempo") {   //Tiempo
+    serverconfig[message.guild.id].mtime = nomb
+    message.channel.send(`*tiempo* cambiado a **${nomb}**`)
+  } else if (confg === "dinero") {   //Dinero 
+    serverconfig[message.guild.id].mmoney = nomb
+    message.channel.send(`*dinero* cambiado a **${nomb}**`)
   } else {
     message.channel.send("**No se ha encontrado lo que quieres cambiar**. Selecciona **un apartado en *cursiva*** de la **configuración del server** (comando : " + "`" + serverconfig[message.guild.id].prefix + "config`). | EJ : `" + serverconfig[message.guild.id].prefix + "set prefijo div.` (cambia el prefijo a `div.`).")
   }

@@ -9,15 +9,18 @@ if(!message.member.id === "318384645274337280") return;
 
 const dinero = args[0]
 const server = args[1]
-
+let din = dinero
+if(!dinero) din = 0
 
 if(!server) {
-  money.updateBal(message.author.id, (dinero))
-  let botembed = new Discord.RichEmbed()
-    .setTitle(`¡Se ha realizado un cambio de **${dinero}$**!`)
+  money.updateBal(message.author.id, (din))
+  money.fetchBal(message.author.id).then((i) => {
+    let botembed = new Discord.RichEmbed()
+    .setTitle(`¡Se ha realizado un cambio de **${din}$**!`)
     .setDescription(`Banco : **${i.money}$**`)
     .setColor('RANDOM')
   message.channel.send(botembed);
+  })
 } else {
   let din = dinero * 1
   banco[message.guild.id].dinero = banco[message.guild.id].dinero + din
