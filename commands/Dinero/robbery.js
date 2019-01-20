@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
   
   
   const item = quiz[Math.floor(Math.random() * quiz.length)];
-  let dinerorob = banco[message.guild.id].dinero
+  //let dinerorob = banco[message.guild.id].dinero
   message.channel.send("@everyone ¡Un robo ha empezado! ¡Ayuda diciendo **stop** para pararlo!")
 
   try {
@@ -32,11 +32,14 @@ module.exports.run = async (bot, message, args) => {
         hecho = 1
       }
   } catch (_) {
-    message.channel.send(`💰${message.author} ha robado el banco y ganado **${dinerorob}$**.`)
-    money.updateBal(message.author.id, dinerorob)
-    banco[message.guild.id].dinero = 0
-    fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {
-      if(err) console.log(err)
-    }); 
+    message.channel.send(`💰${message.author} ha robado el banco y ganado **120$**.`) //quitar luego
+    money.updateBal(message.author.id, 120) //quitar luego
+    
+    //message.channel.send(`💰${message.author} ha robado el banco y ganado **${dinerorob}$**.`)
+    //money.updateBal(message.author.id, dinerorob)
+    //banco[message.guild.id].dinero = 0
+    //fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {
+    //  if(err) console.log(err)
+    //}); 
   }
 }

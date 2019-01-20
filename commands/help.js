@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args) => {
             .addBlankField()
             .addField("Administración de canales =", prfix + "anuncio <anuncio> :` Envia un anuncio al canal de anuncios. **[Admin y Mods]**\n" + prfix + "clear <numero> :` Borra la cantidad de mensajes seleccionada entre 2 y 100. **[Admin y Mods]**\n"+ prfix + "botclear :` Borra los mensajes de los bots. **[Admin y Mods]**")
             .addBlankField()
-            .addField("Administración de miembros =", prfix + "aviso <miembro> <razón> :` Avisas a un miembro por hacer algo malo. Si llega a 3 avisos será baneado solo. **[Admin y Mods]**\n" + prfix + "nickname <miembro> <nombre> :` Cambia el nombre del miembro seleccionado al que quieras. **[Admin y Mods]**\n" + prfix + "tempmute <miembro> <tiempo s/m/h/d> :` **Mutea al miembro seleccionado** durante el tiempo seleccionado. (Not tested) **[Admin y Mods]**\n" + prfix + "unmute <miembro> :` **Desmutea** al usuario. **[Admin y Mods]**\n" + prfix + "direct <miembro> <mensaje> :` Envia un mensaje al miembro seleccionado. **[Admin y Mods]**\n" + prfix + "kick <miembro> <razón opcional> :` Kickea a la persona indicada. **[Admin y Mods]**\n" + prfix + "ban <miembro> <razón opcional> :` Banea a la persona indicada. **[Admin]**\n" + prfix + "tempban <miembro> <tiempo s/m/h/d> <razón opcional> :` Banea a la persona indicada durante el tiempo indicado. **[Admin]**\n" + prfix + "addrole <miembro> <rol> :` Añade el rol al miembro seleccionado. **[Admin]**")
+            .addField("Administración de miembros =", prfix + "aviso <miembro> <razón> :` Avisas a un miembro por hacer algo malo. Si llega a 3 avisos será baneado solo. **[Admin y Mods]**\n" + prfix + "nickname <miembro> <nombre> :` Cambia el nombre del miembro seleccionado al que quieras. **[Admin y Mods]**\n" + prfix + "tempmute <miembro> <tiempo s/m/h/d> :` **Mutea al miembro seleccionado** durante el tiempo seleccionado. **[Admin y Mods]**\n" + prfix + "unmute <miembro> :` **Desmutea** al usuario. **[Admin y Mods]**\n" + prfix + "direct <miembro> <mensaje> :` Envia un mensaje al miembro seleccionado. **[Admin y Mods]**\n" + prfix + "kick <miembro> <razón opcional> :` Kickea a la persona indicada. **[Admin y Mods]**\n" + prfix + "ban <miembro> <razón opcional> :` Banea a la persona indicada. **[Admin]**\n" + prfix + "tempban <miembro> <tiempo s/m/h/d> <razón opcional> :` Banea a la persona indicada durante el tiempo indicado. **[Admin]**\n" + prfix + "addrole <miembro> <rol> :` Añade el rol al miembro seleccionado. **[Admin]**")
             .setColor('RANDOM');
     
         message.channel.send(botembed);
@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
         let botembed = new Discord.RichEmbed()
             .setThumbnail(bicon)
             .setTitle("💰Comandos Dinero =")
-            .setDescription(prfix + "bank <server opcional> :` 🏛Te dice el **dinero que tienes o que tiene el server** en el banco.\n" + prfix + "rob :` 💼Robas **el dinero del banco del server**. ⏳Se tarda **1min** y si alguien dice **stop** se para el robo y **te ponen una multa de 35$**.\n" + prfix + "daily :` 💵Te da **50$** diarios.\n" + prfix + "shop :` ⚖Abre la **tienda** de Divot\n" + prfix + "buy <objeto> :` 💳**Compra** el **objeto** seleccionado **de la tienda**.\n" + prfix + "donate <miembro> <cantidad> :` 💸**Dona** la **cantidad seleccionada** al **miembro seleccionado**.")
+            .setDescription(prfix + "bank :` 🏛Te dice el **dinero que tienes** en el banco.\n" + prfix + "rob :` 💼Robas **120$**. ⏳Se tarda **1min** y si alguien dice **stop** se para el robo y **te ponen una multa de 35$**.\n" + prfix + "daily :` 💵Te da **50$** diarios.\n" + prfix + "shop :` ⚖Abre la **tienda** de Divot\n" + prfix + "buy <objeto> :` 💳**Compra** el **objeto** seleccionado **de la tienda**.\n" + prfix + "donate <miembro> <cantidad> :` 💸**Dona** la **cantidad seleccionada** al **miembro seleccionado**.")
             .setColor('RANDOM');
     
         message.channel.send(botembed);
@@ -106,3 +106,5 @@ module.exports.run = async (bot, message, args) => {
     message.channel.send(botembed);
     };
 }
+
+//prfix + "bank <server opcional> :` 🏛Te dice el **dinero que tienes o que tiene el server** en el banco.\n" + prfix + "rob :` 💼Robas **el dinero del banco del server**. ⏳Se tarda **1min** y si alguien dice **stop** se para el robo y **te ponen una multa de 35$**.\n"

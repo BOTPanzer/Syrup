@@ -12,9 +12,9 @@ exports.run = (client, message, args) => {
       message.channel.send(embed);
      })
   } else if(args[0] === "server") {
-    let embed = new Discord.RichEmbed()
-      .setDescription(`El banco del server tiene **${banco[message.guild.id].dinero}$**.`)
-      .setColor('RANDOM')
-    message.channel.send(embed);
+    //let embed = new Discord.RichEmbed()
+    //  .setDescription(`El banco del server tiene **${banco[message.guild.id].dinero}$**.`)
+    //  .setColor('RANDOM')
+    //message.channel.send(embed);
   }
 }
