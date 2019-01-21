@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
         let botembed = new Discord.RichEmbed()
             .setThumbnail(bicon)
             .setTitle("💰Comandos Dinero =")
-            .setDescription(prfix + "bank :` 🏛Te dice el **dinero que tienes** en el banco.\n" + prfix + "rob :` 💼Robas **120$**. ⏳Se tarda **1min** y si alguien dice **stop** se para el robo y **te ponen una multa de 35$**.\n" + prfix + "daily :` 💵Te da **50$** diarios.\n" + prfix + "shop :` ⚖Abre la **tienda** de Divot\n" + prfix + "buy <objeto> :` 💳**Compra** el **objeto** seleccionado **de la tienda**.\n" + prfix + "donate <miembro> <cantidad> :` 💸**Dona** la **cantidad seleccionada** al **miembro seleccionado**.")
+            .setDescription(prfix + "bank <server/miembro opcional> :` 🏛Te dice el **dinero que tienes, que tiene el server o que tiene el miembro seleccionado** en el banco.\n" + prfix + "rob :` 💼Robas **el dinero del banco del server**. ⏳Se tarda **1min** y si alguien dice **stop** se para el robo y **te ponen una multa de 35$**.\n" + prfix + "daily :` 💵Te da **50$** diarios.\n" + prfix + "shop :` ⚖Abre la **tienda** de Divot\n" + prfix + "buy <objeto> :` 💳**Compra** el **objeto** seleccionado **de la tienda**.\n" + prfix + "donate <miembro> <cantidad> :` 💸**Dona** la **cantidad seleccionada** al **miembro seleccionado**.")
             .setColor('RANDOM');
     
         message.channel.send(botembed);

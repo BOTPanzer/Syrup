@@ -8,7 +8,7 @@ let xp = require("./commands/Xp/xp.json");
 let userdata = require("./commands/user.json");
 let banco = require("./commands/bancoserver.json");
 function doMagic() {
-  var rand = ['el nuevo video de Pewd', 'memes en reddit', 'bailes rusos', 'tutoriales de FdFlavia', 'el pack de Carbo', 'anime tiddies', 'a Ricardo bailando', '...  ¿Me perdonas?', 'a el calvo de Cepeda'];
+  var rand = ['el nuevo video de Pewd', 'memes en reddit', 'bailes rusos', 'tutoriales de FdFlavia', 'el pack de Carbo', 'anime tiddies', 'a Ricardo bailando', '...  ¿Me perdonas?', 'a el calvo de Cepeda','como ella no te quiere'];
   return rand[Math.floor(Math.random()*rand.length)];
 }
 
