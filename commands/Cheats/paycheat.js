@@ -1,36 +1,36 @@
 const Discord = require("discord.js");
 var money = require('discord-money');
-var fs = require('fs');
-let banco = require("../bancoserver.json");
 
 exports.run = (client, message, args) => {
     
-if(!message.member.id === "318384645274337280") return;
+if(!message.member.id === "318384645274337280") 
+  return message.channel.send("Que haces estupido");
 
 const dinero = args[0]
-const server = args[1]
-let din = dinero
-if(!dinero) din = 0
+if(!dinero)
+  return message.reply("El dinero es dinero, aprende algo dinero");
 
-if(!server) {
-  money.updateBal(message.author.id, (din))
+let member = message.mentions.members.first();
+if(!member)
+  return message.reply("Por favor, menciona un miembro valido del servidor");
+
+if(!args[1]) {
+  money.updateBal(message.author.id, (dinero))
   money.fetchBal(message.author.id).then((i) => {
     let botembed = new Discord.RichEmbed()
-    .setTitle(`¡Se ha realizado un cambio de **${din}$**!`)
-    .setDescription(`Banco : **${i.money}$**`)
+    .setTitle(`¡Se ha realizado un cambio de **${dinero}$**!`)
+    .setDescription(`Banco : **${i.money + (dinero * 1)}$**`)
     .setColor('RANDOM')
   message.channel.send(botembed);
   })
 } else {
-  let din = dinero * 1
-  banco[message.guild.id].dinero = banco[message.guild.id].dinero + din
-  fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {
-    if(err) console.log(err)
-  });
-  let botembed = new Discord.RichEmbed()
-    .setTitle(`¡Se ha realizado un cambio de **${dinero}$** el el banco del server!`)
-    .setDescription(`Banco del server : **${banco[message.guild.id].dinero}$**`)
+  money.updateBal(member.id, (dinero))
+  money.fetchBal(member.id).then((i) => {
+    let botembed = new Discord.RichEmbed()
+    .setTitle(`¡Se ha realizado un cambio de **${dinero}$**!`)
+    .setDescription(`Banco de ${member}: **${i.money + (dinero * 1)}$**`)
     .setColor('RANDOM')
   message.channel.send(botembed);
+})
 }
 }

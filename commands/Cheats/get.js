@@ -4,7 +4,7 @@ exports.run = (client, message, args) => {
 
   if(!args[0]) {
     message.channel.send("Selecciona algo.")
-  } else if(args[0] === "serverconfig") {
+  } else if(args[0] === "config") {
     message.channel.send(`serverconfig.json`, {
         files: [
           "./commands/serverconfig.json"

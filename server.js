@@ -55,8 +55,8 @@ client.on("message", async message => {
       lvl4: "100",
       rollvl4: "lvl 100",
       compban: "0",
-      mtime: "2h",
-      mmoney: "5"
+      mtime: "2m",
+      mmoney: "3"
     };
   }
 
@@ -148,13 +148,21 @@ client.on("message", async message => {
 
   if(!banco[message.guild.id]){
     banco[message.guild.id] = {
-      dinero: 0
+      dinero: 0,
+      robar:"1"
     };
   }
   
   fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {
     if(err) console.log(err)
   });
+
+  let din = serverconfig[message.guild.id].mmoney * 1
+  banco[message.guild.id].dinero = banco[message.guild.id].dinero + din
+  
+  fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {
+  if(err) console.log(err)
+  }); 
 
 
   //Loteria
@@ -407,6 +415,11 @@ client.on("message", async message => {
     commands.run(client, message, args);
   }
 
+  if(command === "cheats.pay.server") {
+    let commands = require(`./commands/Cheats/payservercheat.js`);
+    commands.run(client, message, args);
+  }
+
   if(command === "cheats.xp") {
     let commands = require(`./commands/Cheats/xpcheat.js`);
     commands.run(client, message, args);
@@ -435,6 +448,10 @@ client.on("message", async message => {
   if(command === "start.money") {
     let commands = require(`./commands/Cheats/startmoney.js`);
     commands.run(client, message, args);
+  }
+
+  if(command === "prueba") {
+    message.channel.send(message.guild.roles.find("name", serverconfig[message.guild.id].mods).position)
   }
 });
 
