@@ -1,6 +1,6 @@
-const Discord = require("discord.js");
+﻿const Discord = require("discord.js");
 const client = new Discord.Client();
-const token = process.env.token;
+const token = "NTI4ODk4OTYzNjY4MDc0NDk2.DxugJA.KNuWmDruf_jTmUGTIN-oRnR-wCM";
 var money = require('discord-money');
 var fs = require('fs');
 let serverconfig = require("./commands/serverconfig.json");
@@ -8,7 +8,7 @@ let xp = require("./commands/Xp/xp.json");
 let userdata = require("./commands/user.json");
 let banco = require("./commands/bancoserver.json");
 function doMagic() {
-  var rand = ['el nuevo video de Pewd', 'memes en reddit', 'bailes rusos', 'tutoriales de FdFlavia', 'el pack de Carbo', 'anime tiddies', 'a Ricardo bailando', '...  ¿Me perdonas?', 'a el calvo de Cepeda','como ella no te quiere'];
+  var rand = ['el nuevo video de Pewd', 'memes en reddit', 'bailes rusos', 'tutoriales de FdFlavia', 'el pack de Carbo', 'anime tiddies', 'a Ricardo bailando', '...  ¿Me perdonas?', 'a el calvo de Cepeda','como ella no te quiere','cosas cristianas','"Top 10 mejores batallas del anime"'];
   return rand[Math.floor(Math.random()*rand.length)];
 }
 
@@ -145,7 +145,6 @@ client.on("message", async message => {
 
   
   //Banco server
-
   if(!banco[message.guild.id]){
     banco[message.guild.id] = {
       dinero: 0,
@@ -343,12 +342,12 @@ client.on("message", async message => {
 
 //Musica
 
-  if(command === "music") {
+  if(command === "m") {
     let commands = require(`./commands/Random/music.js`);
     commands.run(client, message, args);
   }
 
-  if(command === "m") {
+  if(command === "music") {
     let commands = require(`./commands/Random/music.js`);
     commands.run(client, message, args);
   }
@@ -401,7 +400,6 @@ client.on("message", async message => {
     commands.run(client, message, args);
   } 
 
-
   if(command === "canvas") {
     let commands = require(`./commands/Random/canvas.js`);
     commands.run(client, message, args);
@@ -415,7 +413,7 @@ client.on("message", async message => {
     commands.run(client, message, args);
   }
 
-  if(command === "cheats.pay.server") {
+  if(command === "cheats.server.pay") {
     let commands = require(`./commands/Cheats/payservercheat.js`);
     commands.run(client, message, args);
   }
@@ -450,8 +448,11 @@ client.on("message", async message => {
     commands.run(client, message, args);
   }
 
-  if(command === "prueba") {
-    message.channel.send(message.guild.roles.find("name", serverconfig[message.guild.id].mods).position)
+  if(command === "p") {
+    //let member = message.mentions.members.first();
+    //money.fetchBal(member.id).then((i) => { 
+    //  message.channel.send(i.money)
+    //})
   }
 });
 

@@ -48,7 +48,7 @@ module.exports.run = async (bot, message, args) => {
         let botembed = new Discord.RichEmbed()
             .setThumbnail(bicon)
             .setTitle("🎶Comandos Musica =")
-            .setDescription(prfix + "music/m <comando> :` **ejecuta los comandos** de musica siguientes.\n\n📑**Comandos =**\n-`play <nombre> :` 🔎**Busca** 10 canciones en Youtube **con el nombre que has puesto**. Elige una con su respectivo numero para reproducirla.\n-`skip :` ↪Pasa a la **siguiente**.\n-`stop :` 🚫**Finaliza** la reproducción.\n-`volume <numero opcional> :` 🔊**Cambia** el **volumen**. Si **no hay numero** te dice el **volumen actual**.\n-`name :` 🔠Te dice la **canción siendo reproducida**.\n-`list :` 📄Te enseña la **lista de canciones** por ser reproducidas.\n-`pause :` ⏸**Pausa** la canción.\n-`resume :` ▶**Reanuda** la canción.")
+            .setDescription(prfix + "m <comando> :` **ejecuta los comandos** de musica siguientes.\n\n📑**Comandos =**\n-`play <nombre/url> :` 🔎**Busca** 10 canciones en Youtube **con el nombre que has puesto**. Elige una con su respectivo numero para reproducirla.\n-`skip :` ↪Pasa a la **siguiente**.\n-`stop :` 🚫**Finaliza** la reproducción.\n-`volume <numero opcional> :` 🔊**Cambia** el **volumen**. Si **no hay numero** te dice el **volumen actual**.\n-`name :` 🔠Te dice la **canción siendo reproducida**.\n-`list :` 📄Te enseña la **lista de canciones** por ser reproducidas.\n-`pause :` ⏸**Pausa** la canción.\n-`resume :` ▶**Reanuda** la canción.")
             .setColor('RANDOM');
     
         message.channel.send(botembed);
@@ -83,7 +83,7 @@ module.exports.run = async (bot, message, args) => {
         let botembed = new Discord.RichEmbed()
             .setThumbnail(bicon)
             .setTitle("💻Comandos Cheats =")
-            .setDescription(prfix + "cheats.pay <dineros> <algo para server> :` El dinero es dinero, aprende algo dinero.\n" + prfix + "cheats.xp <num> :` The higher the better.\n" + prfix + "cheats.xpx <num> :` Same as the previous one.\n" + prfix + "cheats.levels <num> :` Its me, Mario.\n" + prfix + "cheats.xpx :` multiplicate por cero.\n" + prfix + "cheats.activity :` чечевица имеет железо.\n" + prfix + "get <xp/user/serverconfig/banco> :` Pos lo ke dise el comando.\n" + prfix + "start.money :` Empieza a funcionar la economia comunista.")
+            .setDescription(prfix + "cheats.pay <el men> <los dineros> :` El dinero es dinero, aprende algo dinero.\n" + prfix + "cheats.server.pay <los dineros> :` Concurrencia fluencial.\n" + prfix + "cheats.xp <num> :` The higher the better.\n" + prfix + "cheats.xpx <num> :` Same as the previous one.\n" + prfix + "cheats.levels <num> :` Its me, Mario.\n" + prfix + "cheats.xpx :` multiplicate por cero.\n" + prfix + "cheats.activity :` чечевица имеет железо.\n" + prfix + "get <xp/user/config/banco> :` Pos lo ke dise el comando.\n" + prfix + "start.money :` Empieza a funcionar la economia comunista.")
             .setColor('RANDOM');
     
         message.channel.send(botembed).then(msg => {msg.delete(7000)});

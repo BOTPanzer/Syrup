@@ -23,7 +23,7 @@ const fetch = require('snekfetch'),
     .setTitle(`**${word}**`)
     .setURL("https://www.urbandictionary.com/define.php?term=" + gudword)
     .setDescription(`**Definición :**\n${definition}\n\n**Ejemplo :**\n${exam}`)
-    .setFooter("Votos : " + `👍 : ${thump} | 👎 : ${thumbdown}`)
+    .setFooter(`👍 ${thump} | 👎 ${thumbdown}`)
   
     message.channel.send(embed)
   })
