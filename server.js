@@ -1,6 +1,6 @@
-const Discord = require("discord.js");
+﻿const Discord = require("discord.js");
 const client = new Discord.Client();
-const token = process.env.token;
+const token = "NTI4ODk4OTYzNjY4MDc0NDk2.DxugJA.KNuWmDruf_jTmUGTIN-oRnR-wCM";
 var money = require('discord-money');
 var fs = require('fs');
 let serverconfig = require("./commands/serverconfig.json");
@@ -353,11 +353,34 @@ client.on("message", async message => {
   }
 
 
-//Random
+//Random 1
 
   if(command === "sugerencia") {
     let commands = require(`./commands/Random/sugerencia.js`);
     commands.run(client, message, args);
+  }
+  
+  if(command === "urban") {
+    let commands = require(`./commands/Random/urban.js`);
+    commands.run(client, message, args);
+  }
+  
+  if(command === "meme") {
+    let commands = require(`./commands/Random/meme.js`);
+    commands.run(client, message, args);
+  }
+  
+  if(command === "reddit") {
+    let commands = require(`./commands/Random/reddit.js`);
+    commands.run(client, message, args);
+  } 
+
+
+//Random 2
+
+  if(command === "say") {
+    let commands = require(`./commands/Random/say.js`);
+    commands.run(client, message, args);  
   }
 
   if(command === "ping") {
@@ -365,43 +388,36 @@ client.on("message", async message => {
     commands.run(client, message, args);  
   }
   
-  if(command === "say") {
-    let commands = require(`./commands/Random/say.js`);
-    commands.run(client, message, args);  
-  }
-
-  if(command === "randnum") {
-    let commands = require(`./commands/Random/randnum.js`);
-    commands.run(client, message, args);  
-  }
-
   if(command === "stats") {
     let commands = require(`./commands/Random/stats.js`);
     commands.run(client, message, args);  
   }
-  
+
   if(command === "cs") {
     let commands = require(`./commands/Random/cs.js`);
     commands.run(client, message, args);
   }
 
-  if(command === "urban") {
-    let commands = require(`./commands/Random/urban.js`);
+  
+//D&D
+
+  if(command === "dice") {
+    let commands = require(`./commands/DnD/dice.js`);
     commands.run(client, message, args);
   }
 
-  if(command === "meme") {
-    let commands = require(`./commands/Random/meme.js`);
+  if(command === "battle") {
+    let commands = require(`./commands/DnD/battle.js`);
     commands.run(client, message, args);
   }
 
-  if(command === "reddit") {
-    let commands = require(`./commands/Random/reddit.js`);
+  if(command === "place") {
+    let commands = require(`./commands/DnD/place.js`);
     commands.run(client, message, args);
-  } 
+  }
 
-  if(command === "canvas") {
-    let commands = require(`./commands/Random/canvas.js`);
+  if(command === "move") {
+    let commands = require(`./commands/DnD/move.js`);
     commands.run(client, message, args);
   }
 
@@ -423,13 +439,13 @@ client.on("message", async message => {
     commands.run(client, message, args);
   }
 
-  if(command === "cheats.levels") {
-    let commands = require(`./commands/Cheats/levelcheat.js`);
+  if(command === "cheats.xpx") {
+    let commands = require(`./commands/Cheats/xpxcheat.js`);
     commands.run(client, message, args);
   }
 
-  if(command === "cheats.xpx") {
-    let commands = require(`./commands/Cheats/xpxcheat.js`);
+  if(command === "cheats.levels") {
+    let commands = require(`./commands/Cheats/levelcheat.js`);
     commands.run(client, message, args);
   }
 
@@ -441,18 +457,6 @@ client.on("message", async message => {
   if(command === "get") {
     let commands = require(`./commands/Cheats/get.js`);
     commands.run(client, message, args);
-  }
-
-  if(command === "start.money") {
-    let commands = require(`./commands/Cheats/startmoney.js`);
-    commands.run(client, message, args);
-  }
-
-  if(command === "p") {
-    //let member = message.mentions.members.first();
-    //money.fetchBal(member.id).then((i) => { 
-    //  message.channel.send(i.money)
-    //})
   }
 });
 

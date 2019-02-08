@@ -22,10 +22,16 @@ exports.run = (client, message, args) => {
         "./commands/user.json"
       ]
     })
-  } else if(args[0] === "banco") {
-    message.channel.send(`user.json`, {
+  } else if(args[0] === "bank") {
+    message.channel.send(`bancoserver.json`, {
         files: [
           "./commands/bancoserver.json"
+      ]
+    })
+  } else if(args[0] === "battle") {
+    message.channel.send(`battle.json`, {
+        files: [
+          "./commands/DnD/battle.json"
       ]
     })
   }
