@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
       .setColor('#00c2d4')
       .setDescription(`[${allowed[randomnumber].data.title}](${allowed[randomnumber].data.url})`)
       .setImage(allowed[randomnumber].data.url)
-      .setFooter("👍 "+ allowed[randomnumber].data.ups + " | 💬 " + allowed[randomnumber].data.num_comments + " | 😄 " + allowed[randomnumber].data.author + " | ¿No se ve? Pulsa el titulo del post.")
+      .setFooter("👍 "+ allowed[randomnumber].data.ups + " | 💬 " + allowed[randomnumber].data.num_comments)
     message.channel.send(embed)
   } catch (err) {
     return console.log(err);
