@@ -38,14 +38,17 @@ client.on("message", async message => {
   if(!serverconfig[message.guild.id]){
     serverconfig[message.guild.id] = {
       prefix: "syp.",
-      mods: "Moderadores",
-      verificacion: "Verificado",
       anuncios: "anuncios",
       sugerencias: "sugerencias",
       welcome: "general",
-      banavisos: "0",
       avisosban: "5",
+      banavisos: "0",
       invitacion: "(pon tu url aqui)",
+      mods: "Moderadores",
+      verificacion: "Verificado",
+      police: "Police",
+      slut: "Slut",
+      cashier: "Cashier",
       lvl1: "15",
       rollvl1: "lvl 15",
       lvl2: "40",
@@ -208,11 +211,6 @@ client.on("message", async message => {
   
 
 //Administracion
-  
-  if(command === "aviso") {
-    let commands = require(`./commands/Administracion/aviso.js`);
-    commands.run(client, message, args);  
-  }
 
   if(command === "anuncio") {
     let commands = require(`./commands/Administracion/anuncio.js`);
@@ -230,6 +228,11 @@ client.on("message", async message => {
   }  
   
   
+  if(command === "aviso") {
+    let commands = require(`./commands/Administracion/aviso.js`);
+    commands.run(client, message, args);  
+  }
+  
   if(command === "nickname") {
     let commands = require(`./commands/Administracion/nickname.js`);
     commands.run(client, message, args);  
@@ -245,11 +248,6 @@ client.on("message", async message => {
     commands.run(client, message, args);  
   }
 
-  if(command === "direct") {
-    let commands = require(`./commands/Administracion/direct.js`);
-    commands.run(client, message, args);  
-  }
-
   if(command === "kick") {
     let commands = require(`./commands/Administracion/kick.js`);
     commands.run(client, message, args);
@@ -258,16 +256,6 @@ client.on("message", async message => {
   if(command === "ban") {
     let commands = require(`./commands/Administracion/ban.js`);
     commands.run(client, message, args);
-  }
-
-  if(command === "tempban") {
-    let commands = require(`./commands/Administracion/tempban.js`);
-    commands.run(client, message, args);
-  }
-
-  if(command === "addrole") {
-    let commands = require(`./commands/Administracion/addrole.js`);
-    commands.run(client, message, args);  
   }
 
 

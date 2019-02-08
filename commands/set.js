@@ -13,12 +13,6 @@ module.exports.run = async (client, message, args) => {
     serverconfig[message.guild.id].prefix = nomb
     message.channel.send(`*Prefijo* cambiado a **${nomb}**`);
     message.guild.members.get(client.user.id).setNickname("Syrup [" + nomb + "]");
-  } else if (confg === "mods") {   //Rol mods
-    serverconfig[message.guild.id].mods = nomb
-    message.channel.send(`Rol de *mods* cambiado a **${nomb}**`)
-  } else if (confg === "verificacion") {   //Rol verificanión
-    serverconfig[message.guild.id].verificacion = nomb
-    message.channel.send(`Rol de *verificacion* cambiado a **${nomb}**`)
   } else if (confg === "anuncios") {   //Canal anuncios
     serverconfig[message.guild.id].anuncios = nomb
     message.channel.send(`Canal de *anuncios* cambiado a **${nomb}**`)
@@ -28,15 +22,31 @@ module.exports.run = async (client, message, args) => {
   } else if (confg === "welcome") {   //Canal bienvenida
     serverconfig[message.guild.id].welcome = nomb
     message.channel.send(`Canal de *welcome* cambiado a **${nomb}**`)
-  } else if (confg === "banavisos") {   //Ban avisos
-    serverconfig[message.guild.id].banavisos = nomb
-    message.channel.send(`*banavisos* cambiado a **${nomb}**`)
   } else if (confg === "avisosban") {   //Avisos ban
     serverconfig[message.guild.id].avisosban = nomb
     message.channel.send(`*avisosban* cambiados a **${nomb}**`)
+  } else if (confg === "banavisos") {   //Ban avisos
+    serverconfig[message.guild.id].banavisos = nomb
+    message.channel.send(`*banavisos* cambiado a **${nomb}**`)
   } else if (confg === "invitacion") {   //Invitación
     serverconfig[message.guild.id].invitacion = nomb
     message.channel.send(`*Invitacion* del server cambiada a **${nomb}**`)
+
+  } else if (confg === "mods") {   //Rol mods
+    serverconfig[message.guild.id].mods = nomb
+    message.channel.send(`Rol de *mods* cambiado a **${nomb}**`)
+  } else if (confg === "verificacion") {   //Rol verificanión
+    serverconfig[message.guild.id].verificacion = nomb
+    message.channel.send(`Rol de *verificacion* cambiado a **${nomb}**`)
+  } else if (confg === "police") {   //Rol policia
+    serverconfig[message.guild.id].police = nomb
+    message.channel.send(`Rol de *police* cambiado a **${nomb}**`)
+  } else if (confg === "slut") {   //Rol slut
+    serverconfig[message.guild.id].slut = nomb
+    message.channel.send(`Rol de *slut* cambiado a **${nomb}**`)
+  } else if (confg === "cashier") {   //Rol cashier
+    serverconfig[message.guild.id].cashier = nomb
+    message.channel.send(`Rol de *cashier* cambiado a **${nomb}**`)
 
   } else if (confg === "lvl1") {   //lvl 1
     serverconfig[message.guild.id].lvl1 = nomb

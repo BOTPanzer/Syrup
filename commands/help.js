@@ -8,13 +8,16 @@ module.exports.run = async (bot, message, args) => {
     let prfix = "`" + pfx
 
 
-    if(hlp === "admin") {
+    if(hlp === "admin channels") {
         let botembed = new Discord.RichEmbed()
-            .setTitle("🛠Comandos Administración =")
-            .addBlankField()
-            .addField("Administración de canales =", prfix + "anuncio <anuncio> :` Envia un anuncio al canal de anuncios. **[Admin y Mods]**\n" + prfix + "clear <numero> :` Borra la cantidad de mensajes seleccionada entre 2 y 100. **[Admin y Mods]**\n"+ prfix + "botclear :` Borra los mensajes de los bots. **[Admin y Mods]**")
-            .addBlankField()
-            .addField("Administración de miembros =", prfix + "aviso <miembro> <razón> :` Avisas a un miembro por hacer algo malo. Si llega a 3 avisos será baneado solo. **[Admin y Mods]**\n" + prfix + "nickname <miembro> <nombre> :` Cambia el nombre del miembro seleccionado al que quieras. **[Admin y Mods]**\n" + prfix + "tempmute <miembro> <tiempo s/m/h/d> :` **Mutea al miembro seleccionado** durante el tiempo seleccionado. **[Admin y Mods]**\n" + prfix + "unmute <miembro> :` **Desmutea** al usuario. **[Admin y Mods]**\n" + prfix + "direct <miembro> <mensaje> :` Envia un mensaje al miembro seleccionado. **[Admin y Mods]**\n" + prfix + "kick <miembro> <razón opcional> :` Kickea a la persona indicada. **[Admin y Mods]**\n" + prfix + "ban <miembro> <razón opcional> :` Banea a la persona indicada. **[Admin]**\n" + prfix + "tempban <miembro> <tiempo s/m/h/d> <razón opcional> :` Banea a la persona indicada durante el tiempo indicado. **[Admin]**\n" + prfix + "addrole <miembro> <rol> :` Añade el rol al miembro seleccionado. **[Admin]**")
+            .setTitle("🛠Comandos Administración de canales =")
+            .setDescription(prfix + "anuncio <anuncio> :` Envia un anuncio al canal de anuncios. **[Admin y Mods]**\n" + prfix + "clear <numero> :` Borra la cantidad de mensajes seleccionada (2-100). **[Admin y Mods]**\n"+ prfix + "botclear :` Borra los mensajes de los bots. **[Admin y Mods]**")
+            .setColor('RANDOM');
+        message.channel.send(botembed);
+    } else if(hlp === "admin users") {
+        let botembed = new Discord.RichEmbed()
+            .setTitle("🛠Comandos Administración de miembros =")
+            .setDescription(prfix + "aviso <miembro> <razón> :` Avisas a un miembro por incumplir alguna regla. **[Admin y Mods]**\n" + prfix + "nickname <miembro> <nombre> :` Cambia el nombre del miembro al que quieras. **[Admin y Mods]**\n" + prfix + "tempmute <miembro> <tiempo s/m/h/d> :` **Mutea al miembro** durante el tiempo seleccionado. **[Admin y Mods]**\n" + prfix + "unmute <miembro> :` **Desmutea** al miembro. **[Admin y Mods]**\n" + prfix + "kick <miembro> <razón opcional> :` Kickea al miembro indicada. **[Admin y Mods]**\n" + prfix + "ban <miembro> <razón opcional> :` Banea al miembro indicada. **[Admin]**")
             .setColor('RANDOM');
         message.channel.send(botembed);
     } else if(hlp === "juegos") {
@@ -35,6 +38,12 @@ module.exports.run = async (bot, message, args) => {
             .setDescription(prfix + "m <comando> :` **ejecuta los comandos** de musica siguientes.\n\n📑**Comandos =**\n-`play <nombre/url> :` 🔎**Busca** 10 canciones en Youtube **con el nombre que has puesto**. Elige una con su respectivo numero para reproducirla.\n-`skip :` ↪Pasa a la **siguiente**.\n-`stop :` 🚫**Finaliza** la reproducción.\n-`volume <numero opcional> :` 🔊**Cambia** el **volumen**. Si **no hay numero** te dice el **volumen actual**.\n-`name :` 🔠Te dice la **canción siendo reproducida**.\n-`list :` 📄Te enseña la **lista de canciones** por ser reproducidas.\n-`pause :` ⏸**Pausa** la canción.\n-`resume :` ▶**Reanuda** la canción.")
             .setColor('RANDOM');
         message.channel.send(botembed);
+    } else if(hlp === "xp") {
+        let botembed = new Discord.RichEmbed()
+            .setTitle("✨Comandos Xp =")
+            .setDescription(prfix + "profile <miembro opcional> :` 🗿Te enseña tu **lvl** y tu **xp (o la del miembro seleccionado)**.")
+            .setColor('RANDOM');
+        message.channel.send(botembed);
     } else if(hlp === "random 1") {
         let botembed = new Discord.RichEmbed()
             .setTitle("🎂Comandos Random 1 =")
@@ -45,12 +54,6 @@ module.exports.run = async (bot, message, args) => {
         let botembed = new Discord.RichEmbed()
             .setTitle("😆Comandos Random 2 =")
             .setDescription(prfix + "say <texto> :` 💬Dice lo que quieras.\n" + prfix + "ping :` 🔧Calcula el **ping** al enviar un mensaje.\n" + prfix + "stats :` Te enseña los miembros del server.\n" + prfix + "cs <SteamID> :` 🔪Te enseña tus **stats** del **CS:GO**💣 **(Necesario perfil en publico)**.")
-            .setColor('RANDOM');
-        message.channel.send(botembed);
-    } else if(hlp === "xp") {
-        let botembed = new Discord.RichEmbed()
-            .setTitle("✨Comandos Xp =")
-            .setDescription(prfix + "profile <miembro opcional> :` 🗿Te enseña tu **lvl** y tu **xp (o la del miembro seleccionado)**.")
             .setColor('RANDOM');
         message.channel.send(botembed);
     } else if(hlp === "dnd") {
@@ -70,8 +73,9 @@ module.exports.run = async (bot, message, args) => {
     } else {
     let botembed = new Discord.RichEmbed()
         .setTitle("🥞Comandos Syrup =")
-        .addField("⚙Config =", prfix + "config`", true)
-        .addField("🛠Administración =", prfix + "help admin`", true)
+        .addField("⚙Config =", prfix + "config`")
+        .addField("🛠Administración 1 =", prfix + "help admin channels`", true)
+        .addField("🛠Administración 2 =", prfix + "help admin users`", true)
         .addField("🎮Juegos =", prfix + "help juegos`", true)
         .addField("💰Dinero =", prfix + "help dinero`", true)
         .addField("🎶Musica =", prfix + "help musica`", true)
