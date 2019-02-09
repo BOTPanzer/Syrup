@@ -8,11 +8,11 @@ if(!message.member.id === "318384645274337280")
 
 const dinero = args[1]
 if(!dinero)
-  return message.reply("El dinero es dinero, aprende algo dinero");
+  return message.reply("el dinero es dinero, aprende algo dinero");
 
 let member = message.mentions.members.first();
 if(!member)
-  return message.reply("Por favor, menciona un miembro valido del servidor");
+  return message.reply("por favor, menciona un miembro valido del servidor");
 
 money.updateBal(member.id, (dinero))
 money.fetchBal(member.id).then((i) => {

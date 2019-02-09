@@ -12,7 +12,8 @@ module.exports.run = async (client, message, args) => {
   if (confg === "prefijo") {
     serverconfig[message.guild.id].prefix = nomb
     message.channel.send(`*Prefijo* cambiado a **${nomb}**`);
-    message.guild.members.get(client.user.id).setNickname("Syrup [" + nomb + "]");
+    if (nomb === "syp.") message.guild.members.get(client.user.id).setNickname("Syrup");
+    if (!nomb === "syp.") message.guild.members.get(client.user.id).setNickname("Syrup [" + nomb + "]");
   } else if (confg === "anuncios") {   //Canal anuncios
     serverconfig[message.guild.id].anuncios = nomb
     message.channel.send(`Canal de *anuncios* cambiado a **${nomb}**`)
@@ -72,6 +73,12 @@ module.exports.run = async (client, message, args) => {
   } else if (confg === "rollvl4") {   //rol lvl 4
     serverconfig[message.guild.id].rollvl4 = nomb
     message.channel.send(`*rollvl4* cambiado a **${nomb}**`)
+  } else if (confg === "lvl5") {   //lvl 5
+    serverconfig[message.guild.id].lvl5 = nomb
+    message.channel.send(`*lvl5* cambiado a **${nomb}**`)
+  } else if (confg === "rollvl5") {   //rol lvl 5
+    serverconfig[message.guild.id].rollvl5 = nomb
+    message.channel.send(`*rollvl5* cambiado a **${nomb}**`)
 
   } else if (confg === "comprar.ban") {   //Comprar ban
     serverconfig[message.guild.id].compban = nomb
@@ -83,7 +90,7 @@ module.exports.run = async (client, message, args) => {
     serverconfig[message.guild.id].mmoney = nomb
     message.channel.send(`*dinero* cambiado a **${nomb}**`)
   } else {
-    message.channel.send("**No se ha encontrado lo que quieres cambiar**. Selecciona **un apartado en *cursiva*** de la **configuración del server** (comando : " + "`" + serverconfig[message.guild.id].prefix + "config`). | EJ : `" + serverconfig[message.guild.id].prefix + "set prefijo div.` (cambia el prefijo a `div.`).")
+    message.channel.send("**No se ha encontrado lo que quieres cambiar**. Selecciona **un apartado en *cursiva*** de `" + serverconfig[message.guild.id].prefix + "config`.")
   }
 
   fs.writeFile("./commands/serverconfig.json", JSON.stringify(serverconfig), (err) => {

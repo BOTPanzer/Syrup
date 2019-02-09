@@ -139,21 +139,17 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
   if(serverconfig[message.guild.id].compban === "1") {
     if(objeto === "ban") {
       money.fetchBal(message.author.id).then((i) => {
-      if (i.money > 2400) {
-        if (!userdata[message.guild.id+"|"+message.author.id].ban === 1) {
-        money.updateBal(message.author.id, -2400).then((i) => {
-        message.guild.fetchMember(message.author)
-        .then(member => {
-          userdata[message.guild.id+"|"+message.author.id].ban = 1
+      if(i.money > 2400) {
+        if(userdata[message.guild.id+"."+message.author.id].ban === 0) {
+          money.updateBal(message.author.id, -2400)
+          userdata[message.guild.id+"."+message.author.id].ban = 1
           fs.writeFile("./commands/user.json", JSON.stringify(userdata), (err) => {
             if(err) console.log(err)
           });
-          message.channel.send("**Ban** comprado correctamente. Ya tienes permiso para **usar el comando** " + prfix + "ban <miembro> <razón opcional>` **1 vez**.\nSolo puedes banear a gente con **menor o igual rol que tú**.");
-        })
-      })
-      } else {
-        message.channel.send("Ya tienes un **Ban** en tu posesión, no vaciles.")
-      }
+          message.channel.send("**Ban** comprado correctamente. Ya **puedes usar** " + prfix + "ban <miembro> <razón opcional>` **1 vez**.\n(Solo puedes banear a gente con **menor o igual rol que tú**).");
+        } else if(userdata[message.guild.id+"."+message.author.id].ban === 1) {
+        message.channel.send("Ya tienes un **ban** en tu posesión, no vaciles.")
+        }
       } else {
         message.channel.send(nomoney);
       }
@@ -221,5 +217,4 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
     }
     })
   }
-
 }

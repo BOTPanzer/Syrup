@@ -55,8 +55,10 @@ client.on("message", async message => {
       rollvl2: "lvl 40",
       lvl3: "65",
       rollvl3: "lvl 65",
-      lvl4: "100",
-      rollvl4: "lvl 100",
+      lvl4: "75",
+      rollvl4: "lvl 75",
+      lvl5: "100",
+      rollvl5: "lvl 100",
       compban: "0",
       mtime: "2m",
       mmoney: "3"
@@ -131,33 +133,37 @@ client.on("message", async message => {
       let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl4}`);
       member.addRole(role).catch(console.error);
     })
+  } else if(curlvl === `${serverconfig[message.guild.id].lvl5}`) {
+    message.guild.fetchMember(message.author)
+    .then(member => {
+      let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl5}`);
+      member.addRole(role).catch(console.error);
+    })
   }
 
 
   //userdata
-  if(!userdata[message.guild.id+"|"+message.author.id]){
-    userdata[message.guild.id+"|"+message.author.id] = {
+  if(!userdata[message.guild.id+"."+message.author.id]){
+    userdata[message.guild.id+"."+message.author.id] = {
       avisos: 0,
       ban: 0
     };
+    fs.writeFile("./commands/user.json", JSON.stringify(userdata), (err) => {
+      if(err) console.log(err)
+    });
   }
   
-  fs.writeFile("./commands/user.json", JSON.stringify(userdata), (err) => {
-    if(err) console.log(err)
-  });
 
-  
   //Banco server
   if(!banco[message.guild.id]){
     banco[message.guild.id] = {
       dinero: 0,
       robar:"1"
     };
+    fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {
+      if(err) console.log(err)
+    });
   }
-  
-  fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {
-    if(err) console.log(err)
-  });
 
   let din = serverconfig[message.guild.id].mmoney * 1
   banco[message.guild.id].dinero = banco[message.guild.id].dinero + din
@@ -176,7 +182,7 @@ client.on("message", async message => {
   } 
 
   
-  //Comienzo
+//Comienzo
   let prefix = serverconfig[message.guild.id].prefix  
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
@@ -210,7 +216,7 @@ client.on("message", async message => {
   }
   
 
-//Administracion
+//Admin 1
 
   if(command === "anuncio") {
     let commands = require(`./commands/Administracion/anuncio.js`);
@@ -228,6 +234,8 @@ client.on("message", async message => {
   }  
   
   
+//Admin 2
+
   if(command === "aviso") {
     let commands = require(`./commands/Administracion/aviso.js`);
     commands.run(client, message, args);  
