@@ -30,6 +30,7 @@ loadImage(fondo).then((image) => {
   loadImage(message.author.avatarURL).then((image) => {
     ctx.translate(6, 6)
     ctx.drawImage(image, 0, 0, 63, 63)
+    ctx.translate(-6, -6)
     const buf2 = canvas.toBuffer('image/png', { compressionLevel: 3, filters: canvas.PNG_FILTER_NONE })
     message.channel.send({
       files: [ 

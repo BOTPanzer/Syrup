@@ -5,7 +5,7 @@ const ctx = canvas.getContext('2d')
 const fondo = 'commands/Xp/rank/xpppp.jpg'
 registerFont('commands/Xp/rank/Pixyy.ttf', { family: 'Pixyy' })
   
-module.exports.run = async (bot, message) => {
+module.exports.run = async (bot, message, args) => {
 
 let member = message.mentions.members.first();
 if(!member) member = message.author
@@ -58,7 +58,8 @@ loadImage(fondo).then((image) => {
   loadImage(member.avatarURL).then((image) => {
     ctx.translate(6, 6)
     ctx.drawImage(image, 0, 0, 63, 63)
-    const buf2 = canvas.toBuffer('image/jpeg', { quality: 0.5 })
+    ctx.translate(-6, -6)
+    const buf2 = canvas.toBuffer('image/png', { compressionLevel: 3, filters: canvas.PNG_FILTER_NONE })
     message.channel.send({
       files: [ 
         buf2

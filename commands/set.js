@@ -93,7 +93,5 @@ module.exports.run = async (client, message, args) => {
     message.channel.send("**No se ha encontrado lo que quieres cambiar**. Selecciona **un apartado en *cursiva*** de `" + serverconfig[message.guild.id].prefix + "config`.")
   }
 
-  fs.writeFile("./commands/serverconfig.json", JSON.stringify(serverconfig), (err) => {
-    if(err) console.log(err)
-  }); 
+  fs.writeFile("./commands/serverconfig.json", JSON.stringify(serverconfig), (err) => {if(err) console.log(err)}); 
 }
