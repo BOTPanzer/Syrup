@@ -1,58 +1,69 @@
-const Discord = require('discord.js');
 let xp = require("./xp.json");
-
-module.exports.run = async (bot, message, args) => {
-  let member = message.mentions.members.first();
-  let curxp = xp[message.author.id].xp;
-  let curlvl = xp[message.author.id].level;
-  let curmul = xp[message.author.id].xpmul;
-  let nxtLvl = (curlvl * 300) + ((curlvl - (curlvl / 2)) * curlvl) * 50;
-
-  if(!member) {
-    if(curlvl >= 100) rango = "👑"
-    if(curlvl >= 85) rango = "💎"
-    if(curlvl >= 70) rango = "💍"
-    if(curlvl >= 55) rango = "🏆"
-    if(curlvl >= 40) rango = "🥇"
-    if(curlvl >= 30) rango = "🥈"
-    if(curlvl >= 20) rango = "🥉"
-    if(curlvl >= 10) rango = "🏅"
-    if(curlvl >= 5) rango = "🎖"
-    if(curlvl < 5) rango = "🎓"
-    let perfil = new Discord.RichEmbed()
-      .setTitle(message.author.tag)
-      .setDescription(`Nivel **${curlvl}** | XP **${curxp}/${nxtLvl}** | **x${curmul}** | ${rango}`)
-      .setColor('#f0d800')
-    message.channel.send(perfil);
-
-  } else {
-
-  if(!xp[member.id]){
-    xp[member.id] = {
-      xp: 0,
-      level: 0,
-      xpmul: 1
-    };
-  }
+const { registerFont, createCanvas, loadImage } = require('canvas')
+const canvas = createCanvas(305, 75)
+const ctx = canvas.getContext('2d')
+const fondo = 'commands/Xp/rank/xpppp.jpg'
+registerFont('commands/Xp/rank/Pixyy.ttf', { family: 'Pixyy' })
   
-  let curmxp = xp[member.id].xp;
-  let curmlvl = xp[member.id].level;
-  let nxtmLvl = (curmlvl * 300) + ((curmlvl - (curmlvl / 4)) * curmlvl) * 10;
+module.exports.run = async (bot, message) => {
 
-  if(curmlvl >= 100) rango = "👑"
-  if(curmlvl >= 85) rango = "💎"
-  if(curmlvl >= 70) rango = "💍"
-  if(curmlvl >= 55) rango = "🏆"
-  if(curmlvl >= 40) rango = "🥇"
-  if(curmlvl >= 30) rango = "🥈"
-  if(curmlvl >= 20) rango = "🥉"
-  if(curmlvl >= 10) rango = "🏅"
-  if(curmlvl >= 5) rango = "🎖"
-  if(curmlvl < 5) rango = "🎓"
-  let perfil = new Discord.RichEmbed()
-    .setTitle(member.user.tag)
-    .setDescription(`Nivel **${curmlvl}** | XP **${curmxp}/${nxtmLvl}** | **x${curmul}** | ${rango}`)
-    .setColor('#f0d800')
-  message.channel.send(perfil);
-  }
+let member = message.mentions.members.first();
+if(!member) member = message.author
+
+let curxp = xp[member.id].xp;
+let curlvl = xp[member.id].level;
+let curmul = xp[member.id].xpmul;
+let nxtLvl = (curlvl * 300) + ((curlvl - (curlvl / 2)) * curlvl) * 50;
+
+if(curlvl < 5) rango = "🎓"
+if(curlvl >= 5) rango = "🏅"
+if(curlvl >= 10) rango = "🥉"
+if(curlvl >= 20) rango = "🥈"
+if(curlvl >= 35) rango = "🥇"
+if(curlvl >= 55) rango = "🏆"
+if(curlvl >= 70) rango = "💍"
+if(curlvl >= 85) rango = "💎"
+if(curlvl >= 100) rango = "👑"
+
+//Fondo
+loadImage(fondo).then((image) => {
+  ctx.translate(0, 0)
+  ctx.drawImage(image, 0, 0, 305, 75)
+    
+  // Write Xp
+  ctx.font = '15px Pixyy'
+  ctx.rotate(0)
+  ctx.fillStyle = '#AAAAAA'
+  ctx.fillText(`Xp: ${curxp}/${nxtLvl}`, 75, 21)
+
+  // Write Lvl 
+  ctx.font = '15px Pixyy'
+  ctx.rotate(0)
+  ctx.fillStyle = '#AAAAAA'
+  ctx.fillText(`Lvl: ${curlvl}`, 75, 43)
+
+  // Write XpMul
+  ctx.font = '15px Pixyy'
+  ctx.rotate(0)
+  ctx.fillStyle = '#AAAAAA'
+  ctx.fillText(`XpMul: x${curmul}`, 75, 65)
+
+  // Write emoji
+  ctx.font = '30px Pixyy'
+  ctx.rotate(0)
+  ctx.fillStyle = '#AAAAAA'
+  ctx.fillText(`${rango}`, 260, 62)
+  
+  // Draw user avatar
+  loadImage(member.avatarURL).then((image) => {
+    ctx.translate(6, 6)
+    ctx.drawImage(image, 0, 0, 63, 63)
+    const buf2 = canvas.toBuffer('image/jpeg', { quality: 0.5 })
+    message.channel.send({
+      files: [ 
+        buf2
+      ]  
+    })
+  })
+})
 }

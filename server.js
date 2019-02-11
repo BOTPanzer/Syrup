@@ -1,6 +1,6 @@
-const Discord = require("discord.js");
+﻿const Discord = require("discord.js");
 const client = new Discord.Client();
-const token = process.env.token;
+const token = "NTI4ODk4OTYzNjY4MDc0NDk2.DxugJA.KNuWmDruf_jTmUGTIN-oRnR-wCM";
 var money = require('discord-money');
 var fs = require('fs');
 let serverconfig = require("./commands/serverconfig.json");
@@ -65,9 +65,7 @@ client.on("message", async message => {
     };
   }
 
-  fs.writeFile("./commands/serverconfig.json", JSON.stringify(serverconfig), (err) => {
-    if(err) console.log(err)
-  }); 
+  fs.writeFile("./commands/serverconfig.json", JSON.stringify(serverconfig), (err) => {if(err) console.log(err)}); 
   
  
   //XP
@@ -83,9 +81,7 @@ client.on("message", async message => {
     xp[message.author.id].xpmul = 1
   }
 
-  fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
-    if(err) console.log(err)
-  });
+  fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {if(err) console.log(err)});
 
   let xpAdd = (Math.floor(Math.random() * 3) + 7) * xp[message.author.id].xpmul;
   console.log(message.author.tag + " ha ganado " + xpAdd);
@@ -97,49 +93,30 @@ client.on("message", async message => {
 
   if(nxtLvl <= xp[message.author.id].xp){
     xp[message.author.id].level = curlvl + 1;
-    let lvlup = new Discord.RichEmbed()
-      .setTitle(`¡**${message.author.tag}** ha subido de nivel!`)
-      .setDescription(`Recompensa por subir al nivel **${curlvl + 1}** : **10$**`)
-      .setColor('RANDOM')
-    message.channel.send(lvlup).then(msg => {msg.delete(7000)});
+    fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {if(err) console.log(err)});
     money.updateBal(message.author.id, 10)
+    let commands = require(`./commands/Xp/mee6.js`);
+    commands.run(client, message);
   }
 
-  fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
-    if(err) console.log(err)
-  });
-
-  if(curlvl === `${serverconfig[message.guild.id].lvl1}`) {
-    message.guild.fetchMember(message.author)
-    .then(member => {
+  message.guild.fetchMember(message.author).then(member => {
+    if(curlvl === `${serverconfig[message.guild.id].lvl1}`) {
       let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl1}`);
       member.addRole(role).catch(console.error);
-    })
-  } else if(curlvl === `${serverconfig[message.guild.id].lvl2}`) {
-    message.guild.fetchMember(message.author)
-    .then(member => {
+    } else if(curlvl === `${serverconfig[message.guild.id].lvl2}`) {
       let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl2}`);
       member.addRole(role).catch(console.error);
-    })
-  } else if(curlvl === `${serverconfig[message.guild.id].lvl3}`) {
-    message.guild.fetchMember(message.author)
-    .then(member => {
+    } else if(curlvl === `${serverconfig[message.guild.id].lvl3}`) {
       let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl3}`);
       member.addRole(role).catch(console.error);
-    })
-  } else if(curlvl === `${serverconfig[message.guild.id].lvl4}`) {
-    message.guild.fetchMember(message.author)
-    .then(member => {
+    } else if(curlvl === `${serverconfig[message.guild.id].lvl4}`) {
       let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl4}`);
       member.addRole(role).catch(console.error);
-    })
-  } else if(curlvl === `${serverconfig[message.guild.id].lvl5}`) {
-    message.guild.fetchMember(message.author)
-    .then(member => {
+    } else if(curlvl === `${serverconfig[message.guild.id].lvl5}`) {
       let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl5}`);
       member.addRole(role).catch(console.error);
-    })
-  }
+    }
+  })
 
 
   //userdata
@@ -148,9 +125,7 @@ client.on("message", async message => {
       avisos: 0,
       ban: 0
     };
-    fs.writeFile("./commands/user.json", JSON.stringify(userdata), (err) => {
-      if(err) console.log(err)
-    });
+    fs.writeFile("./commands/user.json", JSON.stringify(userdata), (err) => {if(err) console.log(err)});
   }
   
 
@@ -160,17 +135,13 @@ client.on("message", async message => {
       dinero: 0,
       robar:"1"
     };
-    fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {
-      if(err) console.log(err)
-    });
+    fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {if(err) console.log(err)});
   }
 
   let din = serverconfig[message.guild.id].mmoney * 1
   banco[message.guild.id].dinero = banco[message.guild.id].dinero + din
   
-  fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {
-  if(err) console.log(err)
-  }); 
+  fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {if(err) console.log(err)}); 
 
 
   //Loteria
