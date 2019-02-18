@@ -10,13 +10,46 @@ if(!member) member = message.author
 if(!player[member.id]){
   player[member.id] = {
     nombre: "(nombre personaje)",
+
+    fuerza: "(fuerza)",
+    bonfuerza: "(bonificador fuerza)",
+    destreza: "(destreza)",
+    bondestreza: "(bonificador destreza)",
+    constitu: "(constitución)",
+    bonconstitu: "(bonificador constitución)",
+    inteligencia: "(inteligencia)",
+    boninteligencia: "(bonificador inteligencia)",
+    sabiduria: "(sabiduria)",
+    bonsabiduria: "(bonificador sabiduria)",
+    carisma: "(carisma)",
+    boncarisma: "(bonificador carisma)",
+
+    inpiracion: "(inspiración)",
+    competencia: "(bonificador competencia)",
+
+    armor: "(armadura)",
+    iniciativa: "(iniciativa)",
+    speed: "(velocidad)",
     full: "(vida full)",
     temp: "(vida temporal)",
-    armor: "(armadura)",
-    comp: "(bonificador competencia)",
+    ddgolpe: "",
+    exitos: "",
+    fallos: "",
+
     arma1: "(arma 1)",
     arma2: "(arma 2)",
     arma3: "(arma 3)",
+    ammo1: "(munición arma 1)",
+    ammo2: "(munición arma 2)",
+    ammo3: "(munición arma 3)",
+
+    equip1: "",
+    equip2: "",
+    equip3: "",
+    equip4: "",
+    equip5: "",
+    equip1: "",
+    equipextra: "",
   };
 }
 

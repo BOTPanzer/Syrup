@@ -47,7 +47,7 @@ module.exports.run = async (bot, message, args) => {
     } else if(hlp === "random 1") {
         let botembed = new Discord.RichEmbed()
             .setTitle("🎂Comandos Random 1 =")
-            .setDescription(prfix + "sugerencia <sugerencia> :` 📊Envia una sugerencia de respuestas ✅ o ❎ al canal sugerencias.\n" + prfix + "urban <palabra> :` 💻Busca una palabra en el **Urban Dictionary**📚.\n" + prfix + "meme :` 🔀Meme aleatorio de reddit👌.\n" + prfix + "reddit <subreddit> :` 🔀Imagen aleatoria de un subreddit.")
+            .setDescription(prfix + "sugerencia <sugerencia> :` 📊Envia una sugerencia de respuestas ✅ o ❎ al canal **" + serverconfig[message.guild.id].sugerencias + "**.\n" + prfix + "urban <palabra> :` 💻Busca una palabra en el **Urban Dictionary**📚.\n" + prfix + "meme <num 1-10 opcional> :` 👌Meme/s de reddit.\n" + prfix + "reddit <subreddit> :` 🔀Imagen aleatoria de un subreddit.")
             .setColor('RANDOM');
         message.channel.send(botembed);
     } else if(hlp === "random 2") {

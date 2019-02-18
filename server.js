@@ -18,16 +18,6 @@ client.on("ready", () => {
   client.user.setActivity( doMagic(), { type: "WATCHING"})
 });
 
-client.on("guildCreate", guild => {
-  console.log(`Nuevo server unido : ${guild.name} (id: ${guild.id}). ¡Este server tiene ${guild.memberCount} miembros!`);
-});
-
-client.on("guildDelete", guild => {
-  console.log(`Server salido : ${guild.name} (id: ${guild.id}). Este server tenia ${guild.memberCount} miembros.`);
-});
-
-
-
 client.on("message", async message => {
 
   if(message.author.bot) return;
@@ -64,7 +54,6 @@ client.on("message", async message => {
       mmoney: "3"
     };
   }
-
   fs.writeFile("./commands/serverconfig.json", JSON.stringify(serverconfig), (err) => {if(err) console.log(err)}); 
   
  
@@ -80,25 +69,25 @@ client.on("message", async message => {
   if(xp[message.author.id].xpmul === null) {
     xp[message.author.id].xpmul = 1
   }
-
   fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {if(err) console.log(err)});
 
+      //Determinar todo
   let xpAdd = (Math.floor(Math.random() * 3) + 7) * xp[message.author.id].xpmul;
-  console.log(message.author.tag + " ha ganado " + xpAdd);
-
   let curxp = xp[message.author.id].xp;
   let curlvl = xp[message.author.id].level;
-  let nxtLvl = (curlvl * 300) + ((curlvl - (curlvl / 2)) * curlvl) * 50;
+  let nxtLvl = Math.round(Math.sqrt((curlvl*curlvl)+(curlvl*curlvl*curlvl))*5+200);
   xp[message.author.id].xp =  curxp + xpAdd;
 
+      //Next lvl
   if(nxtLvl <= xp[message.author.id].xp){
-    xp[message.author.id].level = curlvl + 1;
+    xp[message.author.id].level = curlvl + 1
+    xp[message.author.id].xp = 0
     fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {if(err) console.log(err)});
     money.updateBal(message.author.id, 10)
     let commands = require(`./commands/Xp/mee6.js`);
     commands.run(client, message);
   }
-
+      //Roles lvl
   message.guild.fetchMember(message.author).then(member => {
     if(curlvl === `${serverconfig[message.guild.id].lvl1}`) {
       let role = member.guild.roles.find("name", `${serverconfig[message.guild.id].rollvl1}`);
@@ -125,9 +114,9 @@ client.on("message", async message => {
       avisos: 0,
       ban: 0
     };
-    fs.writeFile("./commands/user.json", JSON.stringify(userdata), (err) => {if(err) console.log(err)});
   }
-  
+  fs.writeFile("./commands/user.json", JSON.stringify(userdata), (err) => {if(err) console.log(err)});
+
 
   //Banco server
   if(!banco[message.guild.id]){
@@ -135,12 +124,10 @@ client.on("message", async message => {
       dinero: 0,
       robar:"1"
     };
-    fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {if(err) console.log(err)});
   }
+  fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {if(err) console.log(err)});
 
-  let din = serverconfig[message.guild.id].mmoney * 1
-  banco[message.guild.id].dinero = banco[message.guild.id].dinero + din
-  
+  banco[message.guild.id].dinero = banco[message.guild.id].dinero + (serverconfig[message.guild.id].mmoney * 1)
   fs.writeFile("./commands/bancoserver.json", JSON.stringify(banco), (err) => {if(err) console.log(err)}); 
 
 
@@ -148,7 +135,7 @@ client.on("message", async message => {
   var loteria = Math.floor(Math.random() * 5000);
   if (loteria === 3333) {
     money.updateBal(message.author.id, 200).then((i) => {
-    message.channel.send("Un numero **entre 5000** ha decidido que te llevas **200$**");
+    message.channel.send("¡Un numero **entre 5000** ha decidido que te llevas **200$**!");
     })
   } 
 
@@ -336,7 +323,7 @@ client.on("message", async message => {
     let commands = require(`./commands/Random/meme.js`);
     commands.run(client, message, args);
   }
-  
+
   if(command === "reddit") {
     let commands = require(`./commands/Random/reddit.js`);
     commands.run(client, message, args);
