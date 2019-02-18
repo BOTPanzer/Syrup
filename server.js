@@ -77,6 +77,7 @@ client.on("message", async message => {
   let curlvl = xp[message.author.id].level;
   let nxtLvl = Math.round(Math.sqrt((curlvl*curlvl)+(curlvl*curlvl*curlvl))*5+200);
   xp[message.author.id].xp =  curxp + xpAdd;
+  fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {if(err) console.log(err)});
 
       //Next lvl
   if(nxtLvl <= xp[message.author.id].xp){

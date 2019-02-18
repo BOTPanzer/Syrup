@@ -35,7 +35,7 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
         });
 
         let comprado = new Discord.RichEmbed()
-        .setTitle(`¡**${message.author.tag}** ha comprado XPx2!`)
+        .setTitle(`¡**${message.author.username}** ha comprado XPx2!`)
         .setDescription(`Ahora tu xp subira el doble de rapido. | **XP : x${xp[message.author.id].xpmul}**`)
         .setColor('RANDOM')
         message.channel.send(comprado).then(msg => {msg.delete(7000)});
@@ -78,27 +78,13 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
   if(objeto === "1lvl") {
     money.fetchBal(message.author.id).then((i) => {
     if (i.money > 350) {
-      money.updateBal(message.author.id, -350).then((i) => {
-      message.guild.fetchMember(message.author)
-      .then(member => {
-        
-        let curxp = xp[message.author.id].xp;
-        let curlvl = xp[message.author.id].level;
-        let nxtLvl = (curlvl * 300) + ((curlvl - (curlvl / 2)) * curlvl) * 50;
-        xp[message.author.id].xp = nxtLvl;
-        xp[message.author.id].level = curlvl + 1;
-        let lvlup = new Discord.RichEmbed()
-          .setTitle(`¡**${message.author.tag}** ha subido de nivel!`)
-          .setDescription(`Recompensa por subir al nivel **${curlvl + 1}** : **10$**`)
-          .setColor('RANDOM')
-        message.channel.send(lvlup).then(msg => {msg.delete(7000)});
-        money.updateBal(message.author.id, 10)
-
-        fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
-        if(err) console.log(err)
-        });
-      })
-      })
+      money.updateBal(message.author.id, -350)
+      let curlvl = xp[message.author.id].level;
+      xp[message.author.id].level = curlvl + 1;
+      fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {if(err) console.log(err)});
+      let commands = require(`../Xp/mee6.js`);
+      commands.run(client, message);
+      money.updateBal(message.author.id, 10)
     } else {
       message.channel.send(nomoney);
     }
@@ -108,28 +94,13 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
   if(objeto === "5lvls") {
     money.fetchBal(message.author.id).then((i) => {
     if (i.money > 1600) {
-      money.updateBal(message.author.id, -1600).then((i) => {
-        message.guild.fetchMember(message.author)
-        .then(member => {
-          
-          let curxp = xp[message.author.id].xp;
-          let curlvl = xp[message.author.id].level;
-          let lvl5mas = curlvl + 4
-          let nxtLvl = (lvl5mas * 300) + ((lvl5mas - (lvl5mas / 2)) * lvl5mas) * 50;
-          xp[message.author.id].xp = nxtLvl;
-          xp[message.author.id].level = curlvl + 5;
-          let lvlup = new Discord.RichEmbed()
-            .setTitle(`¡**${message.author.tag}** ha subido de nivel!`)
-            .setDescription(`Recompensa por subir al nivel **${curlvl + 5}** : **50$**`)
-            .setColor('RANDOM')
-          message.channel.send(lvlup).then(msg => {msg.delete(7000)});
-          money.updateBal(message.author.id, 50)
-  
-          fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
-          if(err) console.log(err)
-          });
-        })
-        })
+      money.updateBal(message.author.id, -1600)
+      let curlvl = xp[message.author.id].level;
+      xp[message.author.id].level = curlvl + 5;
+      fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {if(err) console.log(err)});
+      let commands = require(`../Xp/mee6.js`);
+      commands.run(client, message);
+      money.updateBal(message.author.id, 50)
     } else {
       message.channel.send(nomoney);
     }
@@ -166,7 +137,7 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
           if(client.channels.get("533668911405727764").name === "habitación-1"){
 
             money.updateBal(message.author.id, -350)
-            client.channels.get("533668911405727764").setName(`habitación-de-${message.author.tag}`);
+            client.channels.get("533668911405727764").setName(`habitación-de-${message.author.username}`);
             let roole = message.guild.roles.find(`name`, "Habitacion 1");
             member.addRole(roole.id)
             setTimeout(function(){
@@ -177,7 +148,7 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
           } else if(client.channels.get("533668935015333888").name === "habitación-2"){
 
             money.updateBal(message.author.id, -350)
-            client.channels.get("533668935015333888").setName(`habitación-de-${message.author.tag}`);
+            client.channels.get("533668935015333888").setName(`habitación-de-${message.author.username}`);
             let roole = message.guild.roles.find(`name`, "Habitacion 2");
             member.addRole(roole.id)
             setTimeout(function(){
@@ -188,7 +159,7 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
           } else if(client.channels.get("533668956398157885").name === "habitación-3"){
 
             money.updateBal(message.author.id, -350)
-            client.channels.get("533668956398157885").setName(`habitación-de-${message.author.tag}`);
+            client.channels.get("533668956398157885").setName(`habitación-de-${message.author.username}`);
             let roole = message.guild.roles.find(`name`, "Habitacion 3");
             member.addRole(roole.id)
             setTimeout(function(){
@@ -199,7 +170,7 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
           } else if(client.channels.get("533668977856086018").name === "habitación-4"){
 
             money.updateBal(message.author.id, -350)
-            client.channels.get("533668977856086018").setName(`habitación-de-${message.author.tag}`);
+            client.channels.get("533668977856086018").setName(`habitación-de-${message.author.username}`);
             let roole = message.guild.roles.find(`name`, "Habitacion 4");
             member.addRole(roole.id)
             setTimeout(function(){

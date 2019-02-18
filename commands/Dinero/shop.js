@@ -9,8 +9,8 @@ module.exports.run = async (bot, message, args) => {
     let buyban = "" 
     if(serverconfig[message.guild.id].compban === "1") buyban = "- ***ban*** : Compras el permiso de banear 1 vez.\n**(2400$)**\n"
     let hotel = ""
-    if(message.guild.id === "522139536906649607") hotel = "- ***hotel*** : Compras **una sala privada** para **hacer lo que quieras** por **5 dias**.\n**(350$)**\n"
-    if(message.guild.id === "414530340217159682") hotel = "- ***hotel*** : Compras **una sala privada** para **hacer lo que quieras** por **5 dias**.\n**(350$)**\n"
+    if(message.guild.id === "522139536906649607") hotel = "- ***hotel*** : **Una sala privada** para **hacer lo que quieras** por **5 dias**.\n**(350$)**\n"
+    if(message.guild.id === "414530340217159682") hotel = "- ***hotel*** : **Una sala privada** para **hacer lo que quieras** por **5 dias**.\n**(350$)**\n"
     
     let prfix = "`" + serverconfig[message.guild.id].prefix
     let botembed = new Discord.RichEmbed()
