@@ -1,6 +1,6 @@
-const Discord = require("discord.js");
+﻿const Discord = require("discord.js");
 const client = new Discord.Client();
-const token = process.env.token;
+const token = "NTI4ODk4OTYzNjY4MDc0NDk2.D0S_Ug.Rdcs7YjQN-P9fUBMQX7GrIeIqqk";
 var money = require('discord-money');
 var fs = require('fs');
 let serverconfig = require("./commands/serverconfig.json");
@@ -21,6 +21,13 @@ client.on("ready", () => {
 client.on("message", async message => {
 
   if(message.author.bot) return;
+  if(message.channel.type == "dm") return console.log(message);
+  
+  const swearWords = ["tseries"];
+  if(swearWords.some(word => message.content.toLowerCase().includes(word))) {
+    message.delete();
+    message.channel.send(`¡Hey ${message.author}! Te relajas men.`).then(m => m.delete(4000));
+  }
 
 //Sin "div."
 
@@ -39,6 +46,7 @@ client.on("message", async message => {
       police: "Police",
       slut: "Slut",
       cashier: "Cashier",
+      manager: "Manager",
       lvl1: "15",
       rollvl1: "lvl 15",
       lvl2: "40",
@@ -134,7 +142,7 @@ client.on("message", async message => {
 
   //Loteria
   var loteria = Math.floor(Math.random() * 5000);
-  if (loteria === 3333) {
+  if(loteria === 3333) {
     money.updateBal(message.author.id, 200).then((i) => {
     message.channel.send("¡Un numero **entre 5000** ha decidido que te llevas **200$**!");
     })
@@ -353,7 +361,7 @@ client.on("message", async message => {
     commands.run(client, message, args);
   }
 
-  
+
 //D&D
 
   if(command === "dice") {
@@ -411,6 +419,28 @@ client.on("message", async message => {
 
   if(command === "get") {
     let commands = require(`./commands/Cheats/get.js`);
+    commands.run(client, message, args);
+  }
+
+  if(command === "reboot") {
+    let commands = require(`./commands/Cheats/reboot.js`);
+    commands.run(client, message, args);
+  }
+
+  if(command === "p") {
+
+  }
+
+
+//Eastereggs
+
+  if(command === "julio") {
+    let commands = require(`./commands/Eastereggs/julio.js`);
+    commands.run(client, message, args);
+  }
+
+  if(command === "neko") {
+    let commands = require(`./commands/Eastereggs/nekos.js`);
     commands.run(client, message, args);
   }
 });

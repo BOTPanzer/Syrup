@@ -48,7 +48,10 @@ module.exports.run = async (client, message, args) => {
   } else if (confg === "cashier") {   //Rol cashier
     serverconfig[message.guild.id].cashier = nomb
     message.channel.send(`Rol de *cashier* cambiado a **${nomb}**`)
-
+  } else if (confg === "manager") {   //Rol manager
+    serverconfig[message.guild.id].manager = nomb
+    message.channel.send(`Rol de *manager* cambiado a **${nomb}**`)
+    
   } else if (confg === "lvl1") {   //lvl 1
     serverconfig[message.guild.id].lvl1 = nomb
     message.channel.send(`*lvl1* cambiado a **${nomb}**`)

@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 var money = require('discord-money');
 
 module.exports.run = async (bot, message, args) => {
@@ -8,15 +9,19 @@ module.exports.run = async (bot, message, args) => {
   money.fetchBal(message.author.id).then((i) => {
     if (i.money > 4) {
       if(randomNumber === 4){
-        message.reply("**¡Has muerto!** 💀");
-        money.updateBal(message.author.id, -4 /* Value */).then((i) => {
-        message.channel.send(`**Has perdido 4$!**\n**Banco :** ${i.money}$`);
-      })
+        let embed = new Discord.RichEmbed()
+          .setTitle('¡Has muerto! 💀')
+          .setDescription(`**Has perdido 4$!**\n**Banco :** ${i.money}$`)
+          .setColor('#938FC3');
+        message.channel.send(embed);
+        money.updateBal(message.author.id, -4)
       } else{
-        message.reply("**¡Has sobrevivido!** 😃");
-        money.updateBal(message.author.id, 1 /* Value */).then((i) => {
-        message.channel.send(`**Has ganado 1$!**\n**Banco :** ${i.money}$`);
-      })
+        let embed = new Discord.RichEmbed()
+          .setTitle('¡Has sobrevivido! 😃')
+          .setDescription(`**Has ganado 1$!**\n**Banco :** ${i.money}$`)
+          .setColor('#CFA804');
+        message.channel.send(embed);
+        money.updateBal(message.author.id, 1)
       }
     } else {
       message.channel.send(nomoney);

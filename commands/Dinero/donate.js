@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args) => {
     if(!member)
       return message.reply("Por favor, menciona un miembro valido del servidor");
   
-    let reason = args[1];
+    let reason = args[1] * 1
     if(!reason) 
       return message.reply("Proporciona una cantidad.");
    
@@ -18,7 +18,7 @@ module.exports.run = async (client, message, args) => {
     } else {
       money.updateBal(message.author.id, -reason)
       money.updateBal(member.id, reason)
-      message.channel.send(`**${message.author}** ha donado **${reason}$** a **${member.user}**.`);
+      message.channel.send(`**${message.author}** ha donado **${reason}$** a **${member}**.`);
     }
     })
 

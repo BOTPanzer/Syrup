@@ -1,16 +1,15 @@
 const Discord = require("discord.js");
 var money = require('discord-money');
-let serverconfig = require("../serverconfig.json");
 
 exports.run = async (bot, message, args, color, prefix) => {
 
   var choice = args[0];
   const nomoney = ("No tienes suficiente dinero para hacer eso.");
-  
+
   money.fetchBal(message.author.id).then((i) => {
   if (i.money > 2) {
-    if (choice == "papel" || choice == "pa") {
-      var numb = Math.floor(Math.random() * 100);
+
+    var numb = Math.floor(Math.random() * 100);
     if (numb <= 33) {
       var choice2 = "papel";
     } else if (numb > 66) {
@@ -18,67 +17,52 @@ exports.run = async (bot, message, args, color, prefix) => {
     } else {
       var choice2 = "tijera";
     }
-    if (choice2 == "tijera") {
-      var response = "¡Escojo **Tijera**! :v: **¡He ganado!**"
-      money.updateBal(message.author.id, -2 /* Value */).then((i) => { 
-      message.channel.send(`**Has perdido 2$!**\n**Banco :** ${i.money}$`);
-    })   
-    } else if (choice2 == "papel") {
-        var response = "¡Escojo **Papel**! :hand_splayed: **¡Empate!**"
-    } else {  
-        var response = "¡Escojo **Piedra**! :punch: **¡Has ganado!**"
-        money.updateBal(message.author.id, 2 /* Value */).then((i) => { 
-        message.channel.send(`**Has ganado 2$!**\n**Banco :** ${i.money}$`);
-      })
+
+    if (choice == "papel" || choice == "pa") {  //papel
+      if (choice2 == "tijera") {
+        var response = `¡Escojo **Tijera**! :v: **¡He ganado!**`
+        var response2 = `**Has perdido 2$!**\n**Banco :** ${i.money}$`
+        money.updateBal(message.author.id, -2)
+      } else if (choice2 == "papel") {
+        var response = `¡Escojo **Papel**! :hand_splayed: **¡Empate!**`
+        var response2 = `**Banco :** ${i.money}$`
+      } else if (choice2 == "piedra") { 
+        var response = `¡Escojo **Piedra**! :punch: **¡Has ganado!**`
+        var response2 = `**Has ganado 2$!**\n**Banco :** ${i.money}$`
+        money.updateBal(message.author.id, 2)
       }
-    message.channel.send(response);
-    } else if (choice == "piedra" || choice == "pi") {
-      var numb = Math.floor(Math.random() * 100);
-    if (numb <= 33) {
-      var choice2 = "papel";
-    } else if (numb > 66) {
-      var choice2 = "piedra";
-    } else {
-      var choice2 = "tijera";
+    } else if (choice == "piedra" || choice == "pi") {  //piedra
+      if (choice2 == "tijera") {
+        var response = `¡Escojo **Tijera**! :v: **¡Has ganado!**`
+        var response2 = `**Has ganado 2$!**\n**Banco :** ${i.money}$`
+        money.updateBal(message.author.id, 2)
+      } else if (choice2 == "papel") {
+        var response = `¡Escojo **Papel**! :hand_splayed: **¡He ganado!**`
+        var response2 = `**Has perdido 2$!**\n**Banco :** ${i.money}$`
+        money.updateBal(message.author.id, -2)
+      } else if (choice2 == "piedra") { 
+        var response = `¡Escojo **Piedra**! :punch: **¡Empate!**`
+        var response2 = `**Banco :** ${i.money}$`
+      }
+    } else if (choice == "tijera" || choice == "t") {  //tijera
+      if (choice2 == "tijera") {
+        var response = `¡Escojo **Tijera**! :v: **¡Empate!**`
+        var response2 = `**Banco :** ${i.money}$`
+      } else if (choice2 == "papel") {
+        var response = `¡Escojo **Papel**! :hand_splayed: **¡Has ganado!**`
+        var response2 = `**Has ganado 2$!**\n**Banco :** ${i.money}$`
+        money.updateBal(message.author.id, 2)
+      } else if (choice2 == "piedra") { 
+        var response = `¡Escojo **Piedra**! :punch: **¡He ganado!**`
+        var response2 = `**Has perdido 2$!**\n**Banco :** ${i.money}$`
+        money.updateBal(message.author.id, -2)
+      }
     }
-    if (choice2 == "papel") {
-      var response = "¡Escojo **Papel**! :hand_splayed: **¡He ganado!**"
-      money.updateBal(message.author.id, -2 /* Value */).then((i) => { 
-      message.channel.send(`**Has perdido 2$!**\n**Banco :** ${i.money}$`);
-      })
-    } else if (choice2 == "piedra") {
-      var response = "¡Escojo **Piedra**! :punch: **¡Empate!**"
-    } else {
-      var response = "¡Escojo **Tijera**! :v: **¡Has ganado!**"
-      money.updateBal(message.author.id, 2 /* Value */).then((i) => {
-      message.channel.send(`**Has ganado 2$!**\n**Banco :** ${i.money}$`);
-      })
-    }
-    message.channel.send(response);
-    } else if (choice == "tijera" || choice == "t") {
-      var numb = Math.floor(Math.random() * 100);
-    if (numb <= 33) {
-      var choice2 = "papel";
-    } else if (numb > 66) {
-      var choice2 = "piedra";
-    } else {
-      var choice2 = "tijera";
-    }
-    if (choice2 == "piedra") {
-      var response = "¡Escojo **Papel**! :hand_splayed: **¡Has ganado!**"
-      money.updateBal(message.author.id, 2 /* Value */).then((i) => { 
-      message.channel.send(`**Has ganado 2$!**\n**Banco :** ${i.money}$`);
-    })
-    } else if (choice2 == "tijera") {
-      var response = "¡Escojo **Tijera**! :v: **¡Empate!**"
-    } else {
-      var response = "¡Escojo **Piedra**! :punch: **¡He ganado!**"
-      money.updateBal(message.author.id, -2 /* Value */).then((i) => { 
-      message.channel.send(`**Has perdido 2$!**\n**Banco :** ${i.money}$`);
-    })
-    }
-    message.channel.send(response);
-  } 
+    let embed = new Discord.RichEmbed()
+      .setTitle(response)
+      .setDescription(response2)
+      .setColor('RANDOM');
+    message.channel.send(embed); 
   } else {
     message.channel.send(nomoney);
   } 

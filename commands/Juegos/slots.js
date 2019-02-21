@@ -12,50 +12,38 @@ const nomoney = ("No tienes suficiente dinero para hacer eso.");
 
 money.fetchBal(message.author.id).then((i) => {
 if (i.money > 3) {
-  if (slots[result1] === slots[result2] === slots[result3]) {
+  if (slots[result1] === slots[result2] && slots[result2] === slots[result3]) {
     let wEmbed = new Discord.RichEmbed()
-        .setFooter("**¡Has ganado!**", aicon)
         .setTitle(':slot_machine:Slots:slot_machine:')
         .addField('Resultado', slots[result1] + slots[result2] + slots[result3], true)
+        .addField('¡Has ganado 20$!', `**Banco :** ${i.money}$`)
         .setColor("#f4e842");
     message.channel.send(wEmbed);
-    money.updateBal(message.author.id, 20 /* Value */).then((i) => { // money.updateBal grabs the (userID, value) value being how much you want to add, and puts it into 'i'.
-    message.channel.send(`**¡Has ganado 20$!**\n**Banco :** ${i.money}$`);
-  })
-  } else {
-  if (slots[result1] === slots[result2]) {
+    money.updateBal(message.author.id, 20)
+  } else if (slots[result1] === slots[result2]) {
     let wEmbed = new Discord.RichEmbed()
-        .setFooter("**¡Has ganado!**", aicon)
         .setTitle(':slot_machine:Slots:slot_machine:')
         .addField('Resultado', slots[result1] + slots[result2] + slots[result3], true)
+        .addField('¡Has ganado 8$!', `**Banco :** ${i.money}$`)
         .setColor("#f4e842");
     message.channel.send(wEmbed);
-    money.updateBal(message.author.id, 8 /* Value */).then((i) => {
-    message.channel.send(`**¡Has ganado 8$!**\n**Banco :** ${i.money}$`);
-  })
-  } else {
-  if (slots[result2] === slots[result3]) {
+    money.updateBal(message.author.id, 8)
+  } else if (slots[result2] === slots[result3]) {
     let wEmbed = new Discord.RichEmbed()
-        .setFooter("**¡Has ganado!**", aicon)
         .setTitle(':slot_machine:Slots:slot_machine:')
         .addField('Resultado', slots[result1] + slots[result2] + slots[result3], true)
+        .addField('¡Has ganado 8$!', `**Banco :** ${i.money}$`)
         .setColor("#f4e842");
     message.channel.send(wEmbed);
-    money.updateBal(message.author.id, 8 /* Value */).then((i) => {
-    message.channel.send(`**¡Has ganado 8$!**\n**Banco :** ${i.money}$`);
-  })
+    money.updateBal(message.author.id, 8)
   } else {
   let embed = new Discord.RichEmbed()
-      .setFooter('**¡Has perdido!**', aicon)
       .setTitle(':slot_machine:Slots:slot_machine:')
       .addField('Resultado', slots[result1] + slots[result2] + slots[result3], true)
+      .addField('¡Has perdido 3$!', `**Banco :** ${i.money}$`)
       .setColor("#f4e842");
   message.channel.send(embed);
-  money.updateBal(message.author.id, -3).then((i) => {
-  message.channel.send(`**¡Has pagado una factura de 3$!**\n**Banco :** ${i.money}$`);
-  })
-  }
-  }
+  money.updateBal(message.author.id, -3)
   }
 } else {
   message.channel.send(nomoney);

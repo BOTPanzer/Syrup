@@ -25,7 +25,7 @@ module.exports.run = async (bot, message, args) => {
     var UR_L = "http://csgo.tracker.network/profile/" + args[0];
 
     if (!args[0]) {
-        return message.channel.send(":x: Por favor, pon una STEAMID64 o url custom valida");
+        return message.channel.send("Por favor, pon una **STEAMID64** o **url custom** valida");
     }
 
     request(UR_L, function(err, resp, body) {
@@ -34,7 +34,7 @@ module.exports.run = async (bot, message, args) => {
 
         var KD = getStatData(0, $);
         if (KD == -1) {
-            message.channel.send(":x: Invalido, ¡asegurate de que tu perfil tiene los detalles de juegos publicos y que has puesto una STEAMID64 o url custom valida!");
+            message.channel.send("¡Asegurate de que tu perfil tiene los detalles de juegos publicos y que has puesto una **STEAMID64** o **url custom** valida!");
             return;
         }
 

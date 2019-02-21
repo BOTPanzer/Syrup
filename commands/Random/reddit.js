@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
   let objeto = args.slice(0).join(' ');
   try {
     if (objeto === "") { 
-      message.channel.send("Por favor, selecciona un subreddit.");
+      return message.channel.send("Por favor, selecciona un subreddit.");
     } else {
     const { body } = await snekfetch
       .get(`https://www.reddit.com/r/${objeto}.json?sort=top&t=week`)

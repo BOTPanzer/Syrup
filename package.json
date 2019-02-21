@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/request-promise-native": "^1.0.15",
     "canvas": "^2.3.1",
+    "cheerio": "^1.0.0-rc.2",
     "delay": "^4.1.0",
     "discord-money": "^0.2.0",
     "discord.js": "^11.4.2",

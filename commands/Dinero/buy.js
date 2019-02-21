@@ -24,21 +24,14 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
         return message.channel.send("Te pasas men. No crees que **x512** es suficiente???")
       }
       money.updateBal(message.author.id, -750).then((i) => {
-      message.guild.fetchMember(message.author)
-      .then(member => {
-       
-        let tiempo = "1d"
         xp[message.author.id].xpmul = curmul * 2
-
-        fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
-        if(err) console.log(err)
-        });
+        fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {if(err) console.log(err)});
 
         let comprado = new Discord.RichEmbed()
-        .setTitle(`¡**${message.author.username}** ha comprado XPx2!`)
-        .setDescription(`Ahora tu xp subira el doble de rapido. | **XP : x${xp[message.author.id].xpmul}**`)
+        .setTitle(`¡**${message.author.username}** ha comprado **XPx2**!`)
+        .setDescription(`Ahora tu xp subira **el doble de rapido**. | **XP : x${xp[message.author.id].xpmul}**`)
         .setColor('RANDOM')
-        message.channel.send(comprado).then(msg => {msg.delete(7000)});
+        message.channel.send(comprado); 
 
         setTimeout(function(){
           if(xp[message.author.id].xpmul === 2) {
@@ -59,15 +52,11 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
             xp[message.author.id].xpmul = 128
           } else if(xp[message.author.id].xpmul === 512) {
             xp[message.author.id].xpmul = 256
-          } else if(xp[message.author.id].xpmul < 1) {
+          } else {
             xp[message.author.id].xpmul = 1
           }
-
-          fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {
-            if(err) console.log(err)
-            });
-        }, ms(tiempo));
-      })
+          fs.writeFile("./commands/Xp/xp.json", JSON.stringify(xp), (err) => {if(err) console.log(err)});
+        }, ms("1d"));
       })
     } else {
       message.channel.send(nomoney);
@@ -114,12 +103,10 @@ let prfix = "`" + serverconfig[message.guild.id].prefix
         if(userdata[message.guild.id+"."+message.author.id].ban === 0) {
           money.updateBal(message.author.id, -2400)
           userdata[message.guild.id+"."+message.author.id].ban = 1
-          fs.writeFile("./commands/user.json", JSON.stringify(userdata), (err) => {
-            if(err) console.log(err)
-          });
+          fs.writeFile("./commands/user.json", JSON.stringify(userdata), (err) => {if(err) console.log(err)});
           message.channel.send("**Ban** comprado correctamente. Ya **puedes usar** " + prfix + "ban <miembro> <razón opcional>` **1 vez**.\n(Solo puedes banear a gente con **menor o igual rol que tú**).");
         } else if(userdata[message.guild.id+"."+message.author.id].ban === 1) {
-        message.channel.send("Ya tienes un **ban** en tu posesión, no vaciles.")
+          message.channel.send("Ya tienes un **ban** en tu posesión, no vaciles.")
         }
       } else {
         message.channel.send(nomoney);
