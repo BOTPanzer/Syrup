@@ -1,6 +1,6 @@
 ﻿const Discord = require("discord.js");
 const client = new Discord.Client();
-const token = "NTI4ODk4OTYzNjY4MDc0NDk2.D0S_Ug.Rdcs7YjQN-P9fUBMQX7GrIeIqqk";
+const token = process.env.token;
 var money = require('discord-money');
 var fs = require('fs');
 let serverconfig = require("./commands/serverconfig.json");
