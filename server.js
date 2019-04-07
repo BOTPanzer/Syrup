@@ -333,6 +333,11 @@ client.on("message", async message => {
     commands.run(client, message, args);
   }
 
+  if(command === "surprise") {
+    let commands = require(`./commands/Random/surprise.js`);
+    commands.run(client, message, args);
+  }
+
   if(command === "reddit") {
     let commands = require(`./commands/Random/reddit.js`);
     commands.run(client, message, args);
@@ -428,7 +433,8 @@ client.on("message", async message => {
   }
 
   if(command === "p") {
-
+    let commands = require(`./commands/Eastereggs/p.js`);
+    commands.run(client, message, args);
   }
 
 
@@ -441,6 +447,11 @@ client.on("message", async message => {
 
   if(command === "neko") {
     let commands = require(`./commands/Eastereggs/nekos.js`);
+    commands.run(client, message, args);
+  }
+
+  if(command === "sket") {
+    let commands = require(`./commands/Eastereggs/sket.js`);
     commands.run(client, message, args);
   }
 });

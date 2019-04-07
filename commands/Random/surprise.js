@@ -10,9 +10,9 @@ exports.run = async (client, message, args) => {
   do {
       var rand = Math.floor(Math.random() * 3);
       let coso = ""
-      if(rand === 0) coso = "dankmemes"
-      if(rand === 1) coso = "memes"
-      if(rand === 2) coso = "memeeconomy"
+      if(rand === 0) coso = "atbge"
+      if(rand === 1) coso = "photoshopbattles"
+      if(rand === 2) coso = "youhadonejob"
       try {
         const { body } = await snekfetch
           .get(`https://www.reddit.com/r/${coso}.json?sort=new`)
@@ -20,13 +20,10 @@ exports.run = async (client, message, args) => {
         const allowed = message.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
         if (!allowed.length) return message.channel.send('Se ha producido un **error**. Puede ser que el post **fuese NSFW**.');
         const randomnumber = Math.floor(Math.random() * allowed.length)
-        if(allowed[randomnumber].data.url.includes("/imgur.com")) {
-          allowed[randomnumber].data.url = allowed[randomnumber].data.url.replace(/imgur.com/g,"i.imgur.com");
-        }
         const embed = new Discord.RichEmbed()
           .setColor('#00c2d4')
           .setDescription(`[${allowed[randomnumber].data.title}](${allowed[randomnumber].data.url})`)
-          .setImage(`${allowed[randomnumber].data.url}`)
+          .setImage(allowed[randomnumber].data.url)
           .setFooter("👍 "+ allowed[randomnumber].data.ups + " | 💬 " + allowed[randomnumber].data.num_comments)
         message.channel.send(embed)
       } catch (err) {
