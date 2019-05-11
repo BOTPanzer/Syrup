@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
       .get(`https://www.reddit.com/r/${objeto}.json?sort=new`)
       .query({ limit: 5000 });
     const allowed = message.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
-    if (!allowed.length) return message.channel.send('Se ha producido un **error**. Puede ser que el post **fuese NSFW**.');
+    if (!allowed.length) return message.channel.send('Se ha producido un **error**. Puede ser que el post **fuese NSFW** o que **el subreddit no exista**.');
     const randomnumber = Math.floor(Math.random() * allowed.length)
     if(allowed[randomnumber].data.url.includes("/imgur.com")) {
       allowed[randomnumber].data.url = allowed[randomnumber].data.url.replace(/imgur.com/g,"i.imgur.com");

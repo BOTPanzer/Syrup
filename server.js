@@ -21,12 +21,12 @@ client.on("ready", () => {
 client.on("message", async message => {
 
   if(message.author.bot) return;
-  if(message.channel.type == "dm") return console.log(message);
+  if(message.channel.type == "dm") return console.log(message.author.tag + " ha dicho: " + message);
   
-  const swearWords = ["tseries"];
+  const swearWords = ["tseries", "t-series"];
   if(swearWords.some(word => message.content.toLowerCase().includes(word))) {
     message.delete();
-    message.channel.send(`¡Hey ${message.author}! Te relajas men.`).then(m => m.delete(4000));
+    message.channel.send(`¡Hey ${message.author}! T-gay o T-bad por favor.`).then(m => m.delete(8000));
   }
 
 //Sin "div."
@@ -333,11 +333,6 @@ client.on("message", async message => {
     commands.run(client, message, args);
   }
 
-  if(command === "surprise") {
-    let commands = require(`./commands/Random/surprise.js`);
-    commands.run(client, message, args);
-  }
-
   if(command === "reddit") {
     let commands = require(`./commands/Random/reddit.js`);
     commands.run(client, message, args);
@@ -432,16 +427,21 @@ client.on("message", async message => {
     commands.run(client, message, args);
   }
 
+
+//Eastereggs
+
   if(command === "p") {
     let commands = require(`./commands/Eastereggs/p.js`);
     commands.run(client, message, args);
   }
 
-
-//Eastereggs
-
   if(command === "julio") {
     let commands = require(`./commands/Eastereggs/julio.js`);
+    commands.run(client, message, args);
+  }
+  
+  if(command === "surprise") {
+    let commands = require(`./commands/Eastereggs/surprise.js`);
     commands.run(client, message, args);
   }
 

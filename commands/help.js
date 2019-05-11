@@ -59,7 +59,7 @@ module.exports.run = async (bot, message, args) => {
     } else if(hlp === "dnd") {
         let botembed = new Discord.RichEmbed()
             .setTitle("🐲Comandos D&D =")
-            .setDescription(prfix + "dice <caras> :` 🎲Tira un dado de las caras elegidas.\n" + prfix + "place <player/enemy/blank> <num/num/xy> <xy/xy> :` Coloca lo que quieras en la batalla.\n" + prfix + "move <xy> <xy> :` Cambia las casillas de lugar.")
+            .setDescription(prfix + "dice <caras> :` 🎲Tira un dado de las caras elegidas.\n" + prfix + "battle :` Enseña la batalla.\n" + prfix + "place <player/enemy/blank> <num/num/xy> <xy/xy> :` Coloca lo que quieras en la batalla.\n" + prfix + "move <xy> <xy> :` Cambia las casillas de lugar.")
             .setColor('RANDOM');
         message.channel.send(botembed);
     } else if(hlp === "cheats") {

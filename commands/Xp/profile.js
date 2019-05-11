@@ -4,7 +4,7 @@ const canvas = createCanvas(245, 75)
 const ctx = canvas.getContext('2d')
 const fondo = 'commands/Xp/rank/xpppp.jpg'
 registerFont('commands/Xp/rank/Pixyy.ttf', { family: 'Pixyy' })
-  
+
 module.exports.run = async (bot, message, args) => {
 
 let member = message.mentions.members.first();

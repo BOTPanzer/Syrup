@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args, level) => {
   if (!message.channel.nsfw) return message.channel.send('You can use this commands on NSFW Channel!')
 
-  if(args[0] === "help") {
+  if(args[0] === "help" || !args[0]) {
     const hlp = new Discord.RichEmbed()
       .setTitle(`Comandos =`)
       .setDescription(`neko\nlewd\npussy_jpg\ntits\nboobs\npwankg\nsolo\nsolog\nyuri\npussy\nnsfw_neko_gif\nlewdk\nles\nketa\nhololewd\nRandom_hentai_gif`)
