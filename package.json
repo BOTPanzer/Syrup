@@ -1,6 +1,6 @@
 {
   "name": "Syrup",
-  "version": "4.1",
+  "version": "4.1.1",
   "description": "Nepe",
   "main": "Server.js",
   "scripts": {
