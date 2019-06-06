@@ -34,5 +34,15 @@ exports.run = (client, message, args) => {
           "./commands/DnD/battle.json"
       ]
     })
+  } else if(args[0] === "all") {
+    message.channel.send(`all`, {
+        files: [
+          "./commands/serverconfig.json",
+          "./commands/Xp/xp.json",
+          "./commands/user.json",
+          "./commands/bancoserver.json",
+          "./commands/DnD/battle.json"
+      ]
+    })
   }
 }
