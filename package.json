@@ -1,13 +1,13 @@
 {
   "name": "Syrup",
-  "version": "3.7",
-  "description": "",
+  "version": "4.1",
+  "description": "Nepe",
   "main": "Server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "BOT Panzer",
   "license": "ISC",
   "dependencies": {
     "@types/request-promise-native": "^1.0.15",
@@ -15,7 +15,7 @@
     "cheerio": "^1.0.0-rc.2",
     "delay": "^4.1.0",
     "discord-money": "^0.2.0",
-    "discord.js": "^11.4.2",
+    "discord.js": "^11.5.1",
     "ffmpeg": "0.0.4",
     "ffmpeg-binaries": "^4.0.0",
     "file-system": "^2.2.2",
